@@ -201,7 +201,7 @@
 	
 	<!-- 로고 부분 -->
 	<div id="logo">
-		<a href="/main"><img src="/resources/img/logo.png"></a>
+		<a href="/main"><img src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/logo.png"></a>
 	</div>
 	
 	<!-- 메뉴 바 -->

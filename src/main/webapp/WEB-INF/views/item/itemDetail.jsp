@@ -50,7 +50,7 @@
 	<main>
 		<div class="div_outer">
 			<div class="div_inner">
-				<div class="thumbnail_div"><img style="width: 500px; height: 600px;" src="/resources/thumbnail/${itemDetailInfo.thumbnail }"></div>
+				<div class="thumbnail_div"><img style="width: 500px; height: 600px;" src="${itemDetailInfo.thumbnail }"></div>
 				<div class="item_info_div">
 					<div style="font-size: 25px;">${itemDetailInfo.name }</div>
 					
@@ -129,7 +129,7 @@
 								<div>평점 : ${list.grade }</div>
 								<div>내용 : ${list.content }</div>
 								<c:if test="${list.review_img != null }">
-									<div><img style="width: 150px; height: 150px;" src="/resources/review/${list.review_img }"></div>
+									<div><img style="width: 150px; height: 150px;" src="${list.review_img }"></div>
 								</c:if>
 							</div>
 							<div>작성일 :

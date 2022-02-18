@@ -48,7 +48,7 @@
 					alert("업로드 중입니다. 잠시만 기다려주세요.");
 					setTimeout(function() {
 						$(summernote_this).summernote('editor.insertImage', data.url);
-					}, 5000);
+					}, 3000);
 				},
 				error : function(error) {
 					alert("응답실패 : " + error);

@@ -10,9 +10,9 @@ import java.net.URL;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class KakaoAccessToken {
 
 	public String getAccessToken (String authorize_code) {

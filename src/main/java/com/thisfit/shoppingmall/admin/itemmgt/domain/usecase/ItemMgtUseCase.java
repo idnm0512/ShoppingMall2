@@ -1,11 +1,8 @@
 package com.thisfit.shoppingmall.admin.itemmgt.domain.usecase;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.thisfit.shoppingmall.admin.itemmgt.domain.dto.ItemMgtRequest;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.repository.ItemMgtGateway;
@@ -15,9 +12,8 @@ import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtModifyVO;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInsertVO;
 import com.thisfit.shoppingmall.admin.itemmgt.repository.datasource.ItemMgtOpt;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInfoVO;
+import com.thisfit.shoppingmall.user.util.s3.S3FileUpload;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,10 +25,16 @@ public class ItemMgtUseCase {
 	
 	private final ItemMgtGateway itemMgtGateway;
 	private final ItemMgtOptGateway itemMgtOptGateway;
+	private final S3FileUpload s3FileUpload;
+
+	// 이미지 존재여부 이름으로 체크
+	public boolean isImgNameEmpty(String imgName) {
+		return imgName == null || imgName.isEmpty();
+	}
 
 	// 상품 등록
 	public void insertItemMgt(ItemMgtRequest itemMgtRequest, String[] opt_array) throws IllegalStateException, IOException {
-		String thumbnailName = upsertThumbnail(itemMgtRequest);
+		String url = s3FileUpload.imgUpLoad(itemMgtRequest.getThumbnail_file(), "thumbnail/");
 
 		ItemMgtInsertVO itemMgtInsertVO = new ItemMgtInsertVO(itemMgtRequest.getPrice(),
 															  itemMgtRequest.getDiscount(),
@@ -40,7 +42,7 @@ public class ItemMgtUseCase {
 															  itemMgtRequest.getCategory2(),
 															  itemMgtRequest.getName(),
 															  itemMgtRequest.getContent(),
-															  thumbnailName);
+															  url);
 
 
 		itemMgtGateway.insertItemMgt(itemMgtInsertVO);
@@ -54,7 +56,13 @@ public class ItemMgtUseCase {
 	
 	// 상품 수정
 	public void modifyItemMgt(ItemMgtRequest itemMgtRequest, String[] opt_array) throws IllegalStateException, IOException {
-		String thumbnailName = upsertThumbnail(itemMgtRequest);
+		String url = itemMgtRequest.getThumbnail();
+
+		if (!isImgNameEmpty(itemMgtRequest.getThumbnail_file().getOriginalFilename())) {
+			s3FileUpload.imgDelete(url, "thumbnail/");
+
+			url = s3FileUpload.imgUpLoad(itemMgtRequest.getThumbnail_file(), "thumbnail/");
+		}
 		
 		ItemMgtModifyVO itemMgtModifyVO = new ItemMgtModifyVO(itemMgtRequest.getNo(),
 															  itemMgtRequest.getPrice(),
@@ -63,7 +71,7 @@ public class ItemMgtUseCase {
 															  itemMgtRequest.getCategory2(),
 															  itemMgtRequest.getName(),
 															  itemMgtRequest.getContent(),
-															  thumbnailName);
+															  url);
 
 		itemMgtGateway.modifyItemMgt(itemMgtModifyVO);
 		
@@ -79,7 +87,7 @@ public class ItemMgtUseCase {
 		deleteItemMgtOpt(no);
 		
 		// 썸네일 삭제
-		deleteThumbnail(thumbnail);
+		s3FileUpload.imgDelete(thumbnail, "thumbnail/");
 	}
 	
 	// 옵션 등록 (상품 등록 - insertItemUC()에서 사용됨)
@@ -134,70 +142,22 @@ public class ItemMgtUseCase {
 	public void deleteItemMgtOpt(int item_no) {
 		itemMgtOptGateway.deleteItemMgtOpt(item_no);
 	}
-
-	// 썸네일 이미지 이름 빈 값 체크
-	public boolean isImgNameEmpty(String imgName) {
-		return imgName == null || imgName.isEmpty();
-	}
-	
-	// 썸네일 이미지 insert, update
-	public String upsertThumbnail(ItemMgtRequest itemMgtRequest) throws IllegalStateException, IOException {
-		MultipartFile thumbnailFile = itemMgtRequest.getThumbnail_file();
-		
-		String prevThumbnailName = itemMgtRequest.getThumbnail();
-
-		if (!isImgNameEmpty(thumbnailFile.getOriginalFilename())) {
-			
-			if (!isImgNameEmpty(prevThumbnailName)) deleteThumbnail(prevThumbnailName);
-			
-			String originalFileName = thumbnailFile.getOriginalFilename();
-			String ext = FilenameUtils.getExtension(originalFileName);
-			UUID uuid = UUID.randomUUID();
-			String newThumbnailName = "thumbnail_img_" + uuid + "." + ext;
-			
-			thumbnailFile.transferTo(new File("C:/Users/idnm0/IdeaProjects/ShoppingMall/src/main/webapp/resources/thumbnail/" + newThumbnailName));
-			
-			return newThumbnailName;
-		}
-		
-		return prevThumbnailName;
-	}
-	
-	// 썸네일 이미지 delete
-	public void deleteThumbnail(String thumbnail) {
-		File file = new File("C:/Users/idnm0/IdeaProjects/ShoppingMall/src/main/webapp/resources/thumbnail/" + thumbnail);
-		file.delete();
-	}
 	
 	// 썸머노트 이미지 업로드 ajax
 	public String uploadSummerNoteEditorImg(MultipartFile multipartFile) {
 		JsonObject jsonObject = new JsonObject();
-		
-		// 저장될 외부 경로
-		String fileRoot = "C:/Users/idnm0/IdeaProjects/ShoppingMall/src/main/webapp/resources/content/";
-		
-		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
-		
-		// originalFileName.substring(originalFileName.lastIndexOf("."));
-		String ext = FilenameUtils.getExtension(originalFileName); // 파일 확장자
-		
-		String savedFileName = "content_img_" + UUID.randomUUID() + "." + ext; // 저장될 파일 명
-		
-		File targetFile = new File(fileRoot + savedFileName); // 저장될 외부 경로와 이름
-		
+
 		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			jsonObject.addProperty("url", "/resources/content/" + savedFileName); // 톰캣 server.xml 관련 url
+			String url = s3FileUpload.imgUpLoad(multipartFile, "content/");
+
+			jsonObject.addProperty("url", url);
 			jsonObject.addProperty("responseCode", "success");
-			
+
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
-			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 			System.out.println("[ERROR]: IOException 발생 (썸머노트 이미지 업로드 ajax)");
 		}
-		
+
 		String jsonInfo = jsonObject.toString();
 		
 		return jsonInfo;

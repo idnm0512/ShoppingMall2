@@ -47,5 +47,7 @@ dependencies {
     compile('commons-io:commons-io:2.6')
     compile('commons-fileupload:commons-fileupload:1.4')
 
+    compile('org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

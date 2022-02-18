@@ -141,7 +141,7 @@
 							<td>
 								<div class="grid">
 									<label class="label_scope" for="thumbnail">
-										<img class="img_content" src="/resources/img/white.png" id="thumbnail_img"/>
+										<img class="img_content" src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/white.png" id="thumbnail_img"/>
 									</label>
 									<input type="file" id="thumbnail" name="thumbnail_file" accept="image/*" style="display: none;" onchange="preview(this, 'thumbnail_img')">
 								</div>
@@ -198,7 +198,7 @@
 					<input type="hidden" name="page" value="${page }">
 					<input type="hidden" id="opt_array" name="opt_array">
 					<button class="item_insert_btn">상품등록</button>
-					<button class="cancle_btn">취소</button>
+					<button class="cancel_btn">취소</button>
 				</form>
 				
 				<form id="pageInfo_form" action="/itemMgt/list" method="get">

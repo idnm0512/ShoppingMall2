@@ -160,7 +160,7 @@
 			<div class="div_inner">
 				<c:forEach items="${itemListInfo }" var="list">
 					<div class="item_list_div">
-						<div><img style="width: 200px; height: 200px" src="/resources/thumbnail/${list.thumbnail }"></div>
+						<div><img style="width: 200px; height: 200px" src="${list.thumbnail }"></div>
 						<div>상품번호 : ${list.no }</div>
 						<div>상품명 : ${list.name }</div>
 						<div>가격 : ${list.price }</div>

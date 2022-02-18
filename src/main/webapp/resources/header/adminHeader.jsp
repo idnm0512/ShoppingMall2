@@ -95,7 +95,7 @@
 		<ul>
 			<li>
 				<div id="logo">
-					<a href="/main"><img src="/resources/img/logo.png"></a>
+					<a href="/main"><img src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/logo.png"></a>
 				</div>
 			</li>
 			<li><a class="admin_header_a" href="/userMgt/list?keyword=&page=1">회원관리</a></li>

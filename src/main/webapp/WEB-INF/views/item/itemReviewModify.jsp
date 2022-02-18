@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 				<th>상품이미지</th>
-				<td><img style="width: 200px; height: 200px;" src="/resources/thumbnail/${itemDetailInfo.thumbnail }"></td>
+				<td><img style="width: 200px; height: 200px;" src="${itemDetailInfo.thumbnail }"></td>
 			</tr>
 			<tr>
 				<th>평점</th>
@@ -79,11 +79,11 @@
 					<label class="label_scope" for="review_img">
 						<c:choose>
 							<c:when test="${itemReviewInfo.review_img != null }">
-								<img class="img_content" src="/resources/review/${itemReviewInfo.review_img }" id="review_img_view"/>
+								<img class="img_content" src="${itemReviewInfo.review_img }" id="review_img_view"/>
 								<input type="hidden" name="review_img" value="${itemReviewInfo.review_img }">
 							</c:when>
 							<c:otherwise>
-								<img class="img_content" src="/resources/img/white.png" id="review_img_view"/>
+								<img class="img_content" src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/white.png" id="review_img_view"/>
 							</c:otherwise>
 						</c:choose>
 					</label>

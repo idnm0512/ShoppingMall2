@@ -94,7 +94,7 @@
 				<!-- 카카오 로그인 -->
 				<div>
 					<a href="javascript:kakaoLogin()">
-					    <img src="/resources/img/kakao_login.png" style="width: 250px; height: 60px;">
+					    <img src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/kakao_login.png" style="width: 250px; height: 60px;">
 					</a>
 				</div>
 			</div>

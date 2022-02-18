@@ -75,7 +75,7 @@
 			<div class="div_inner">
 				<c:forEach items="${itemListInfo }" var="list">
 					<div class="item_list_div">
-						<div><a href="/item/detail?no=${list.no }"><img class="img_content" style="width: 300px; height: 400px" src="/resources/thumbnail/${list.thumbnail }"></a></div>
+						<div><a href="/item/detail?no=${list.no }"><img class="img_content" style="width: 300px; height: 400px" src="${list.thumbnail }"></a></div>
 						
 						<br>
 						

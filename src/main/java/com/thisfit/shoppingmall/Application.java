@@ -4,10 +4,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 
-@PropertySource("classpath:mail.properties")
+@PropertySources({
+        @PropertySource("classpath:mail.properties"),
+        @PropertySource("classpath:s3.properties")
+})
 @EnableJpaAuditing
 @SpringBootApplication
 public class Application {

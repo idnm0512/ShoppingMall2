@@ -141,7 +141,7 @@
 							<td>
 								<div class="grid">
 									<label class="label_scope" for="thumbnail">
-										<img class="img_content" src="/resources/thumbnail/${itemDetailInfo.thumbnail }" id="thumbnail_img"/>
+										<img class="img_content" src="${itemDetailInfo.thumbnail }" id="thumbnail_img"/>
 										<input type="hidden" name="thumbnail" value="${itemDetailInfo.thumbnail }">
 									</label>
 									<input type="file" id="thumbnail" name="thumbnail_file" accept="image/*" style="display: none;" onchange="preview(this, 'thumbnail_img')">

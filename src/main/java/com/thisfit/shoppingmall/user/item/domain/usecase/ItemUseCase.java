@@ -1,10 +1,8 @@
 package com.thisfit.shoppingmall.user.item.domain.usecase;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.thisfit.shoppingmall.user.item.domain.dto.ItemReviewRequest;
 import com.thisfit.shoppingmall.user.item.domain.repository.ItemGateway;
@@ -13,12 +11,11 @@ import com.thisfit.shoppingmall.user.item.domain.vo.*;
 import com.thisfit.shoppingmall.user.item.repository.datasource.Item;
 import com.thisfit.shoppingmall.user.item.repository.datasource.ItemReview;
 import com.thisfit.shoppingmall.user.util.paging.PageMaker;
+import com.thisfit.shoppingmall.user.util.s3.S3FileUpload;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Component
@@ -26,6 +23,7 @@ public class ItemUseCase {
 
 	private final ItemGateway itemGateway;
 	private final ItemReviewGateway itemReviewGateway;
+	private final S3FileUpload s3FileUpload;
 
 	// 상품 리스트
 	public List<ItemVO> getItemList(String category, String category2, Pageable pageable) {
@@ -111,10 +109,19 @@ public class ItemUseCase {
 		
 		return itemReviewInfoVO;
 	}
+
+	// 이미지 존재여부 이름으로 체크
+	public boolean isImgNameEmpty(String imgName) {
+		return imgName == null || imgName.isEmpty();
+	}
 	
 	// 상품 리뷰 등록하기
 	public void insertItemReview(ItemReviewRequest itemReviewRequest) throws IllegalStateException, IOException {
-		String reviewImgName = upsertItemReviewImg(itemReviewRequest);
+		String url = itemReviewRequest.getReview_img();
+
+		if (!isImgNameEmpty(itemReviewRequest.getReview_img_file().getOriginalFilename())) {
+			url = s3FileUpload.imgUpLoad(itemReviewRequest.getReview_img_file(), "review/");
+		}
 		
 		ItemReviewInsertVO itemReviewInsertVO =
 									new ItemReviewInsertVO(itemReviewRequest.getReview_no(),
@@ -122,63 +129,35 @@ public class ItemUseCase {
 														   itemReviewRequest.getGrade(),
 														   itemReviewRequest.getUser_id(),
 														   itemReviewRequest.getContent(),
-														   reviewImgName);
+														   url);
 
 		itemReviewGateway.insertItemReview(itemReviewInsertVO);
 	}
 	
 	// 상품 리뷰 수정하기
 	public void modifyItemReview(ItemReviewRequest itemReviewRequest) throws IllegalStateException, IOException {
-		String reviewImgName = upsertItemReviewImg(itemReviewRequest);
+		String url = itemReviewRequest.getReview_img();
+
+		if (!isImgNameEmpty(itemReviewRequest.getReview_img_file().getOriginalFilename())) {
+			if (!isImgNameEmpty(url)) s3FileUpload.imgDelete(url, "review/");
+
+			url = s3FileUpload.imgUpLoad(itemReviewRequest.getReview_img_file(), "review/");
+		}
 		
 		ItemReviewModifyVO itemReviewModifyVO =
 									new ItemReviewModifyVO(itemReviewRequest.getReview_no(),
 														   itemReviewRequest.getGrade(),
 														   itemReviewRequest.getContent(),
-														   reviewImgName);
+														   url);
 
 		itemReviewGateway.modifyItemReview(itemReviewModifyVO);
 	}
-	
+
 	// 상품 리뷰 삭제하기
 	public void deleteItemReview(int review_no, String review_img) {
-		if (review_img != "") deleteItemReviewImg(review_img);
+		if (!isImgNameEmpty(review_img)) s3FileUpload.imgDelete(review_img, "review/");
 
 		itemReviewGateway.deleteItemReview(review_no);
-	}
-	
-	// 상품 이미지 이름 빈 값 체크
-	public boolean isImgNameEmpty(String imgName) {
-		return imgName == null || imgName.isEmpty();
-	}
-	
-	// 상품 리뷰 이미지 insert, update
-	public String upsertItemReviewImg(ItemReviewRequest itemReviewRequest) throws IllegalStateException, IOException {
-		MultipartFile reviewImgFile = itemReviewRequest.getReview_img_file();
-		
-		String prevReviewImgName = itemReviewRequest.getReview_img();
-
-		if (!isImgNameEmpty(reviewImgFile.getOriginalFilename())) {
-			
-			if (!isImgNameEmpty(prevReviewImgName)) deleteItemReviewImg(prevReviewImgName);
-
-			String originalFileName = reviewImgFile.getOriginalFilename();
-			String ext = FilenameUtils.getExtension(originalFileName);
-			UUID uuid = UUID.randomUUID();
-			String newReviewImgName = "review_img_" + uuid + "." + ext;
-			
-			reviewImgFile.transferTo(new File("C:/Users/idnm0/IdeaProjects/ShoppingMall/src/main/webapp/resources/review/" + newReviewImgName));
-			
-			return newReviewImgName;
-		}
-		
-		return prevReviewImgName;
-	}
-	
-	// 상품 리뷰 이미지 delete
-	public void deleteItemReviewImg(String review_img) {
-		File file = new File("C:/Users/idnm0/IdeaProjects/ShoppingMall/src/main/webapp/resources/review/" + review_img);
-		file.delete();
 	}
 
 	// 상품페이지 페이징 처리

@@ -52,7 +52,7 @@
 			</tr>
 			<tr>
 				<th>상품이미지</th>
-				<td><img style="width: 200px; height: 200px;" src="/resources/thumbnail/${itemDetailInfo.thumbnail }"></td>
+				<td><img style="width: 200px; height: 200px;" src="${itemDetailInfo.thumbnail }"></td>
 			</tr>
 			<tr>
 				<th>평점</th>
@@ -76,7 +76,7 @@
 				<th>이미지</th>
 				<td>
 					<label class="label_scope" for="review_img">
-						<img class="img_content" src="/resources/img/white.png" id="review_img_view"/>
+						<img class="img_content" src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/white.png" id="review_img_view"/>
 					</label>
 					<input type="file" id="review_img" name="review_img_file" accept="image/*" style="display: none;" onchange="preview(this, 'review_img_view')">
 				</td>
