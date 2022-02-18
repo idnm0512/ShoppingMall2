@@ -2,6 +2,8 @@ package com.thisfit.shoppingmall;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -15,7 +17,7 @@ import org.springframework.data.web.config.PageableHandlerMethodArgumentResolver
 })
 @EnableJpaAuditing
 @SpringBootApplication
-public class Application {
+public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -28,6 +30,11 @@ public class Application {
         // 넘기는 page 값과 화면상으로 보여지는 page 값을 1로 시작할 수 있게 된다.
         // 솔직히 확실하지 않다..
         return p -> p.setOneIndexedParameters(true);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return super.configure(builder);
     }
 
 }
