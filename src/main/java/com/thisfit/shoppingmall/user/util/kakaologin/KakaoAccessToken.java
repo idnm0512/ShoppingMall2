@@ -34,7 +34,7 @@ public class KakaoAccessToken {
             
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=e5907521b17946d02165d62910b9681b"); // REST API KEY
-            sb.append("&redirect_uri=http://localhost:8090/login/kakaoLogin"); // 리다이렉트 URI
+            sb.append("&redirect_uri=http://ec2-3-35-89-158.ap-northeast-2.compute.amazonaws.com:8080/login/kakaoLogin"); // 리다이렉트 URI
             sb.append("&code=" + authorize_code);
             
             bw.write(sb.toString());
