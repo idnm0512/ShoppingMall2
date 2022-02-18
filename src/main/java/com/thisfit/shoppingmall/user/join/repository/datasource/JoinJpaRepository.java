@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JoinJpaRepository extends JpaRepository<User, UserId> {
+public interface JoinJpaRepository extends JpaRepository<User, Integer> {
 
     // 아이디 중복확인
     @Query("select u.id from User u " +

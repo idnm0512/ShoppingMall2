@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@IdClass(UserId.class)
 @Table(name = "USER_TB")
 @Entity
 public class User implements Serializable {
@@ -34,7 +33,7 @@ public class User implements Serializable {
         joindate timestamp default now(),
         withdrawdate timestamp default null,
         state boolean default true,
-        constraint pk_user primary key(no, id)
+        constraint pk_user primary key(no)
      );
      */
 
@@ -42,9 +41,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int no;
 
-    @Id
     private String id;
-
     private String pwd;
     private String name;
     private String address;
