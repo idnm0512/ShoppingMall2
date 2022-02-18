@@ -10,7 +10,8 @@ import org.springframework.data.web.config.PageableHandlerMethodArgumentResolver
 
 @PropertySources({
         @PropertySource("classpath:mail.properties"),
-        @PropertySource("classpath:s3.properties")
+        @PropertySource("classpath:s3.properties"),
+        @PropertySource("classpath:mysql.properties")
 })
 @EnableJpaAuditing
 @SpringBootApplication
