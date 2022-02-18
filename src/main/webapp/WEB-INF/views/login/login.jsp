@@ -244,7 +244,7 @@
 		
 		function kakaoLogin() {
 		    Kakao.Auth.authorize({
-		    	redirectUri: 'http://localhost:8090/login/kakaoLogin'
+		    	redirectUri: 'http://ec2-3-35-89-158.ap-northeast-2.compute.amazonaws.com:8080/login/kakaoLogin'
 		    });
 		}
 		// 카카오 로그인 End
