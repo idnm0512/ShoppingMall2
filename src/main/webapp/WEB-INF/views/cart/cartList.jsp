@@ -108,7 +108,7 @@
 					</td>
 					<td>
 						<a href="/item/detail?no=${list.item_no }">
-							<img src="/resources/thumbnail/${list.thumbnail }" width="120" height="120">
+							<img src="${list.thumbnail }" width="120" height="120">
 						</a>
 					</td>
 					<td style="text-align: left;">
