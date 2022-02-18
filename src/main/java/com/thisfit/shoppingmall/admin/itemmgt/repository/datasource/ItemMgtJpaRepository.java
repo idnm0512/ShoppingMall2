@@ -13,7 +13,7 @@ public interface ItemMgtJpaRepository extends JpaRepository<Item, Integer> {
 
     // 마지막(방금 등록된) 상품 번호 가져오기 (옵션등록을 위함)
     // 과연 Jpa 메서드로 바꾸는게 효율적일까?
-    @Query(value = "select no from ITEM_TB " +
+    @Query(value = "select no from item_tb " +
                    "order by no desc " +
                    "limit 1",
            nativeQuery = true)
