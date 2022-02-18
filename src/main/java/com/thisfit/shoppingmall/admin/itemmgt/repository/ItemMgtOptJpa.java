@@ -24,9 +24,9 @@ public class ItemMgtOptJpa implements ItemMgtOptGateway {
     public void insertItemMgtOpt(ItemMgtOptInsertVO itemMgtOptInsertVO) {
         ItemMgtOpt itemMgtOpt = ItemMgtOpt.builder()
                                           .itemNo(itemMgtOptInsertVO.getItem_no())
+                                          .qty(itemMgtOptInsertVO.getQty())
                                           .color(itemMgtOptInsertVO.getColor())
                                           .size(itemMgtOptInsertVO.getSize())
-                                          .qty(itemMgtOptInsertVO.getQty())
                                           .build();
 
         itemMgtOptJpaRepository.save(itemMgtOpt);

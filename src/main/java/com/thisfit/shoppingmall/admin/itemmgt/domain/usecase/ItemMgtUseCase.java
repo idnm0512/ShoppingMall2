@@ -104,8 +104,8 @@ public class ItemMgtUseCase {
 				ItemMgtOptInsertVO itemMgtOptInsertVO =
 												new ItemMgtOptInsertVO(item_no,
 																	   qty,
-																	   size,
-																	   color);
+																	   color,
+																	   size);
 
 				itemMgtOptGateway.insertItemMgtOpt(itemMgtOptInsertVO);
 				
