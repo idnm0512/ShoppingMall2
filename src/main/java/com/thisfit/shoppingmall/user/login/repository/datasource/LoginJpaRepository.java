@@ -1,6 +1,5 @@
 package com.thisfit.shoppingmall.user.login.repository.datasource;
 
-import com.thisfit.shoppingmall.user.join.repository.datasource.UserId;
 import com.thisfit.shoppingmall.user.join.repository.datasource.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LoginJpaRepository extends JpaRepository<User, UserId> {
+public interface LoginJpaRepository extends JpaRepository<User, Integer> {
 
     // 로그인
     @Query("select u.id from User u " +

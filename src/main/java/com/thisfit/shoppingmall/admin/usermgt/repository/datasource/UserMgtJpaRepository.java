@@ -1,7 +1,6 @@
 package com.thisfit.shoppingmall.admin.usermgt.repository.datasource;
 
 import com.thisfit.shoppingmall.user.join.repository.datasource.User;
-import com.thisfit.shoppingmall.user.join.repository.datasource.UserId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserMgtJpaRepository extends JpaRepository<User, UserId> {
+public interface UserMgtJpaRepository extends JpaRepository<User, Integer> {
 
     // 회원 리스트
     Page<User> findByIdContains(String keyword, Pageable pageable);
