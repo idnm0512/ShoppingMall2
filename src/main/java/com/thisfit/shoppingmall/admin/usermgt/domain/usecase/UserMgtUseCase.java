@@ -6,7 +6,7 @@ import java.util.List;
 import com.thisfit.shoppingmall.admin.usermgt.domain.repository.UserMgtGateway;
 import com.thisfit.shoppingmall.admin.usermgt.domain.vo.UserMgtVO;
 import com.thisfit.shoppingmall.user.join.repository.datasource.User;
-import com.thisfit.shoppingmall.user.util.paging.PageMaker;
+import com.thisfit.shoppingmall.util.paging.PageMaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

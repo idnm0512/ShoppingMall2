@@ -1,4 +1,4 @@
-package com.thisfit.shoppingmall.user.util.paging;
+package com.thisfit.shoppingmall.util.paging;
 
 import lombok.Getter;
 import org.springframework.data.domain.Pageable;

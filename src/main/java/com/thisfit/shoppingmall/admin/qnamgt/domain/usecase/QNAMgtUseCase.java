@@ -15,7 +15,7 @@ import com.thisfit.shoppingmall.user.qna.domain.dto.QNAWithAnswer;
 import com.thisfit.shoppingmall.user.qna.domain.vo.QNANoAnswerVO;
 import com.thisfit.shoppingmall.user.qna.domain.vo.QNAWithAnswerVO;
 import com.thisfit.shoppingmall.user.qna.repository.datasource.QNA;
-import com.thisfit.shoppingmall.user.util.paging.PageMaker;
+import com.thisfit.shoppingmall.util.paging.PageMaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

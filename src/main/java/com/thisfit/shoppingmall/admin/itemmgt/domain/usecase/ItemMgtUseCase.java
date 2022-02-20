@@ -12,7 +12,7 @@ import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtModifyVO;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInsertVO;
 import com.thisfit.shoppingmall.admin.itemmgt.repository.datasource.ItemMgtOpt;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInfoVO;
-import com.thisfit.shoppingmall.user.util.s3.S3FileUpload;
+import com.thisfit.shoppingmall.util.s3.S3FileUpload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

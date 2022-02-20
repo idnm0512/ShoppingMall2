@@ -1,4 +1,4 @@
-package com.thisfit.shoppingmall.user.util.s3;
+package com.thisfit.shoppingmall.util.s3;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.s3.AmazonS3Client;

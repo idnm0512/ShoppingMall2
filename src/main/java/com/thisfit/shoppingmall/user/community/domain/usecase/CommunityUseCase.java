@@ -4,7 +4,7 @@ import com.thisfit.shoppingmall.user.community.domain.repository.CommunityGatewa
 import com.thisfit.shoppingmall.user.community.domain.vo.CommunityDetailVO;
 import com.thisfit.shoppingmall.user.community.domain.vo.CommunityVO;
 import com.thisfit.shoppingmall.user.community.repository.datasource.Community;
-import com.thisfit.shoppingmall.user.util.paging.PageMaker;
+import com.thisfit.shoppingmall.util.paging.PageMaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

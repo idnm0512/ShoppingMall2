@@ -3,7 +3,7 @@ package com.thisfit.shoppingmall.user.wishlist.domain.usecase;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thisfit.shoppingmall.user.util.paging.PageMaker;
+import com.thisfit.shoppingmall.util.paging.PageMaker;
 import com.thisfit.shoppingmall.user.wishlist.domain.dto.ItemInWishList;
 import com.thisfit.shoppingmall.user.wishlist.domain.dto.WishListRequest;
 import com.thisfit.shoppingmall.user.wishlist.domain.repository.WishListGateway;

@@ -1,4 +1,4 @@
-package com.thisfit.shoppingmall.user.util.controller;
+package com.thisfit.shoppingmall.util.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

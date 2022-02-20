@@ -1,4 +1,4 @@
-package com.thisfit.shoppingmall.user.util.kakaologin;
+package com.thisfit.shoppingmall.util.kakaologin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
