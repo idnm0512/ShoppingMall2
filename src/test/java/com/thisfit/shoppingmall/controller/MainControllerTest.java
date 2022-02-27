@@ -1,4 +1,4 @@
-package com.thisfit.shoppingmall;
+package com.thisfit.shoppingmall.controller;
 
 import com.thisfit.shoppingmall.util.controller.MainController;
 import org.junit.Test;
@@ -29,8 +29,12 @@ public class MainControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void main이_리턴된다() throws Exception {
+    public void mainControllerTest() throws Exception {
+        // success
         String main = "main";
+
+        // fail
+//        String main = "fail";
 
         mvc.perform(get("/main")) // 해당 주소로 HTTP GET 요청
                 .andExpect(status().isOk()) // HTTP 상태값이 200인지 Check
