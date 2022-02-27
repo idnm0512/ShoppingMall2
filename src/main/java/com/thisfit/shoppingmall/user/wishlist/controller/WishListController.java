@@ -34,7 +34,7 @@ public class WishListController {
 		model.addAttribute("wishListInfo", wishListUseCase.getWishList(user_id, pageable));
 		model.addAttribute("pageMaker", wishListUseCase.pagingWishList(user_id, pageable));
 
-		return "/wishList/wishList";
+		return "wishList/wishList";
 	}
 	
 	// 관심상품 등록

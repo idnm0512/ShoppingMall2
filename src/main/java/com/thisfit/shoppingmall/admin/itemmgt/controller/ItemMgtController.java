@@ -46,7 +46,7 @@ public class ItemMgtController {
 		model.addAttribute("itemListInfo", itemUseCase.getItemList(category, category2, pageable));
 		model.addAttribute("pageMaker", itemUseCase.pagingItem(category, category2, pageable));
 
-		return "/admin/itemMgt/itemMgtList";
+		return "admin/itemMgt/itemMgtList";
 	}
 	
 	// 상품등록 페이지 진입
@@ -58,7 +58,7 @@ public class ItemMgtController {
 		model.addAttribute("category2", category2);
 		model.addAttribute("page", page);
 
-		return "/admin/itemMgt/itemMgtInsert";
+		return "admin/itemMgt/itemMgtInsert";
 	}
 	
 	// 상품등록
@@ -96,7 +96,7 @@ public class ItemMgtController {
 		model.addAttribute("category2", category2);
 		model.addAttribute("page", page);
 		
-		return "/admin/itemMgt/itemMgtModify";
+		return "admin/itemMgt/itemMgtModify";
 	}
 	
 	// 상품수정

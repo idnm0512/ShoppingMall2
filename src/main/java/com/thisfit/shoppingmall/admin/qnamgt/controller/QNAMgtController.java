@@ -45,7 +45,7 @@ public class QNAMgtController {
 
 		model.addAttribute("pageMaker", qnaMgtUseCase.pagingQnaMgt(state, pageable));
 
-		return "/admin/qnaMgt/qnaMgtList";
+		return "admin/qnaMgt/qnaMgtList";
 	}
 	
 	// 문의 디테일
@@ -56,7 +56,7 @@ public class QNAMgtController {
 		model.addAttribute("qnaDetailInfo", qnaUseCase.getQnaDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/admin/qnaMgt/qnaMgtDetail";
+		return "admin/qnaMgt/qnaMgtDetail";
 	}
 	
 	// 문의 삭제
@@ -80,7 +80,7 @@ public class QNAMgtController {
 		model.addAttribute("qnaDetailInfo", qnaMgtUseCase.getQnaMgtAnswerDetail(re_no));
 		model.addAttribute("page", page);
 		
-		return "/admin/qnaMgt/qnaMgtAnswerDetail";
+		return "admin/qnaMgt/qnaMgtAnswerDetail";
 	}
 	
 	// 답변 작성 페이지 진입
@@ -91,7 +91,7 @@ public class QNAMgtController {
 		model.addAttribute("qnaDetailInfo", qnaUseCase.getQnaDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/admin/qnaMgt/qnaMgtAnswerWrite";
+		return "admin/qnaMgt/qnaMgtAnswerWrite";
 	}
 	
 	// 답변 작성
@@ -115,7 +115,7 @@ public class QNAMgtController {
 		model.addAttribute("qnaMgtAnswerDetailInfo", qnaMgtUseCase.getQnaMgtAnswerDetail(re_no));
 		model.addAttribute("page", page);
 		
-		return "/admin/qnaMgt/qnaMgtAnswerModify";
+		return "admin/qnaMgt/qnaMgtAnswerModify";
 	}
 	
 	// 답변 수정

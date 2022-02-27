@@ -26,7 +26,7 @@ public class JoinController {
 	public String joinGet() {
 		log.info("회원가입 페이지 진입");
 		
-		return "/join/join";
+		return "join/join";
 	}
 	
 	// 회원가입

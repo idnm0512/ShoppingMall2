@@ -30,7 +30,7 @@ public class MyInfoController {
 		
 		model.addAttribute("myInfo", myInfoUseCase.getMyInfo(id));
 		
-		return "/myInfo/myInfo";
+		return "myInfo/myInfo";
 	}
 	
 	// 내 정보 수정
@@ -50,7 +50,7 @@ public class MyInfoController {
 	public String modifyPwdGet() {
 		log.info("비밀번호 변경 페이지 진입");
 		
-		return "/myInfo/modifyPwd";
+		return "myInfo/modifyPwd";
 	}
 	
 	// 비밀번호 변경

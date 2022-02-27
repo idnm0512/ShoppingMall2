@@ -33,7 +33,7 @@ public class UserMgtController {
 		model.addAttribute("userListInfo", userMgtUseCase.getUserMgtList(keyword, pageable));
 		model.addAttribute("pageMaker", userMgtUseCase.pagingUserMgt(keyword, pageable));
 
-		return "/admin/userMgt/userMgtList";
+		return "admin/userMgt/userMgtList";
 	}
 	
 	// 회원 활성화 / 비활성화

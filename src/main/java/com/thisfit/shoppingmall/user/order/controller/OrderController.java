@@ -28,7 +28,7 @@ public class OrderController {
 		model.addAttribute("order_state", order_state);
 		model.addAttribute("orderListInfo", orderUseCase.getOrderItemList(user_id, order_state));
 		
-		return "/order/orderList";
+		return "order/orderList";
 	}
 	
 	// 상품 구매하기

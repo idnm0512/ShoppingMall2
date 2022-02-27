@@ -45,7 +45,7 @@ public class QNAController {
 
 		model.addAttribute("pageMaker", qnaUseCase.pagingQna(qnaRequest, pageable));
 
-		return "/qna/qnaList";
+		return "qna/qnaList";
 	}
 	
 	// 1:1문의 디테일
@@ -56,7 +56,7 @@ public class QNAController {
 		model.addAttribute("qnaDetailInfo", qnaUseCase.getQnaDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/qna/qnaDetail";
+		return "qna/qnaDetail";
 	}
 	
 	// 1:1문의 작성 페이지 진입
@@ -68,7 +68,7 @@ public class QNAController {
 		model.addAttribute("state", qnaRequest.isState());
 		model.addAttribute("page", page);
 		
-		return "/qna/qnaWrite";
+		return "qna/qnaWrite";
 	}
 	
 	// 1:1문의 작성
@@ -93,7 +93,7 @@ public class QNAController {
 		model.addAttribute("qnaDetailInfo", qnaUseCase.getQnaDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/qna/qnaModify";
+		return "qna/qnaModify";
 	}
 	
 	// 1:1문의 수정
@@ -133,7 +133,7 @@ public class QNAController {
 		model.addAttribute("qnaDetailInfo", qnaMgtUseCase.getQnaMgtAnswerDetail(re_no));
 		model.addAttribute("page", page);
 
-		return "/qna/qnaAnswerDetail";
+		return "qna/qnaAnswerDetail";
 	}
 	
 }

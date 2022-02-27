@@ -30,7 +30,7 @@ public class LoginController {
 	public String loginGet() {
 		log.info("로그인 페이지 진입");
 		
-		return "/login/login";
+		return "login/login";
 	}
 	
 	// 로그인 (아이디, 패스워드 체크)
@@ -61,7 +61,7 @@ public class LoginController {
 	public String findIdGet() {
 		log.info("아이디 찾기 페이지 진입");
 		
-		return "/login/findId";
+		return "login/findId";
 	}
 	
 	// 아이디 찾기
@@ -75,7 +75,7 @@ public class LoginController {
 	public String findPwdGet() {
 		log.info("비밀번호 찾기 페이지 진입");
 		
-		return "/login/findPwd";
+		return "login/findPwd";
 	}
 	
 	// 비밀번호 찾기

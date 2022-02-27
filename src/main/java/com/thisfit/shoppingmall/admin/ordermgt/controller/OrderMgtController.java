@@ -32,7 +32,7 @@ public class OrderMgtController {
 		model.addAttribute("orderListInfo", orderMgtUseCase.getOrderMgtList(order_state, pageable));
 		model.addAttribute("pageMaker", orderMgtUseCase.pagingOrderMgt(order_state, pageable));
 
-		return "/admin/orderMgt/orderMgtList";
+		return "admin/orderMgt/orderMgtList";
 	}
 	
 	// 선택 상품 배송완료

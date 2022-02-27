@@ -38,7 +38,7 @@ public class AdminLoginController {
 	public String adminLoginGet() {
 		log.info("관리자 로그인 페이지 진입");
 		
-		return "/admin/login/login";
+		return "admin/login/login";
 	}
 	
 	// 관리자 로그인

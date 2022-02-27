@@ -18,7 +18,7 @@ public class JusoPopupController {
 	public String jusoPopupGet() {
 		log.info("주소 팝업창 띄우기");
 		
-		return "/juso/jusoPopup";
+		return "juso/jusoPopup";
 	}
 	
 	// 현재 페이지에 주소 입력
@@ -26,7 +26,7 @@ public class JusoPopupController {
 	public String jusoPopupPost() {
 		log.info("현재 페이지에 주소 입력");
 		
-		return "/juso/jusoPopup";
+		return "juso/jusoPopup";
 	}
 	
 }

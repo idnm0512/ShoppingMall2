@@ -33,7 +33,7 @@ public class CommunityController {
 		model.addAttribute("commListInfo", communityUseCase.getCommList(category, pageable));
 		model.addAttribute("pageMaker", communityUseCase.pagingComm(category, pageable));
 		
-		return "/community/commList";
+		return "community/commList";
 	}
 	
 	// 커뮤니티 상세보기
@@ -44,7 +44,7 @@ public class CommunityController {
 		model.addAttribute("commDetailInfo", communityUseCase.getCommDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/community/commDetail";
+		return "community/commDetail";
 	}
 	
 }

@@ -38,7 +38,7 @@ public class CommMgtController {
 		model.addAttribute("commListInfo", communityUseCase.getCommList(category, pageable));
 		model.addAttribute("pageMaker", communityUseCase.pagingComm(category, pageable));
 
-		return "/admin/commMgt/commMgtList";
+		return "admin/commMgt/commMgtList";
 	}
 	
 	// 커뮤관리 상세보기
@@ -49,7 +49,7 @@ public class CommMgtController {
 		model.addAttribute("commDetailInfo", communityUseCase.getCommDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/admin/commMgt/commMgtDetail";
+		return "admin/commMgt/commMgtDetail";
 	}
 	
 	// 커뮤관리 작성 페이지 진입
@@ -60,7 +60,7 @@ public class CommMgtController {
 		model.addAttribute("category", category);
 		model.addAttribute("page", page);
 		
-		return "/admin/commMgt/commMgtWrite";
+		return "admin/commMgt/commMgtWrite";
 	}
 	
 	// 커뮤관리 작성
@@ -84,7 +84,7 @@ public class CommMgtController {
 		model.addAttribute("commDetailInfo", communityUseCase.getCommDetail(no));
 		model.addAttribute("page", page);
 		
-		return "/admin/commMgt/commMgtModify";
+		return "admin/commMgt/commMgtModify";
 	}
 	
 	// 커뮤관리 수정

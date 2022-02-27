@@ -42,7 +42,7 @@ public class ItemController {
 		model.addAttribute("itemListInfo", itemUseCase.getItemList(category, category2, pageable));
 		model.addAttribute("pageMaker", itemUseCase.pagingItem(category, category2, pageable));
 
-		return "/item/itemList";
+		return "item/itemList";
 	}
 	
 	// 상품 디테일
@@ -54,7 +54,7 @@ public class ItemController {
 		model.addAttribute("itemOptInfo", itemMgtUseCase.getItemMgtOptList(no));
 		model.addAttribute("itemReviewInfo", itemUseCase.getItemReviewList(no));
 		
-		return "/item/itemDetail";
+		return "item/itemDetail";
 	}
 	
 	// 상품 리뷰 팝업창 띄우기
@@ -64,7 +64,7 @@ public class ItemController {
 		
 		model.addAttribute("itemDetailInfo", itemUseCase.getItemDetail(no));
 		
-		return "/item/itemReviewInsert";
+		return "item/itemReviewInsert";
 	}
 	
 	// 상품 리뷰 등록하기
@@ -90,7 +90,7 @@ public class ItemController {
 		model.addAttribute("itemDetailInfo", itemUseCase.getItemDetail(no));
 		model.addAttribute("itemReviewInfo", itemUseCase.getItemReviewDetail(review_no));
 		
-		return "/item/itemReviewModify";
+		return "item/itemReviewModify";
 	}
 	
 	// 상품 리뷰 수정하기

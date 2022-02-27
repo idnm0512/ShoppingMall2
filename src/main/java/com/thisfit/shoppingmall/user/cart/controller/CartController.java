@@ -27,7 +27,7 @@ public class CartController {
 		
 		model.addAttribute("cartListInfo", cartUseCase.getCartList(user_id));
 		
-		return "/cart/cartList";
+		return "cart/cartList";
 	}
 	
 	// 장바구니 담기
