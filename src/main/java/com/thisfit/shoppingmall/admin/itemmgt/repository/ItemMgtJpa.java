@@ -5,16 +5,16 @@ import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtInsertVO;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtModifyVO;
 import com.thisfit.shoppingmall.admin.itemmgt.repository.datasource.ItemMgtJpaRepository;
 import com.thisfit.shoppingmall.user.item.repository.datasource.Item;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class ItemMgtJpa implements ItemMgtGateway {
 
-	@Autowired
-	private ItemMgtJpaRepository itemMgtJpaRepository;
+	private final ItemMgtJpaRepository itemMgtJpaRepository;
 	
 	// 상품등록
 	@Override

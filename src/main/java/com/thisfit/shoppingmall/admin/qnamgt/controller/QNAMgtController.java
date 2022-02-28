@@ -4,9 +4,9 @@ import com.thisfit.shoppingmall.admin.qnamgt.domain.dto.QNAMgtAnswerRequest;
 import com.thisfit.shoppingmall.admin.qnamgt.domain.usecase.QNAMgtUseCase;
 import com.thisfit.shoppingmall.user.qna.domain.dto.QNARequest;
 import com.thisfit.shoppingmall.user.qna.domain.usecase.QNAUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/qnaMgt")
 public class QNAMgtController {
 
 	public static final Logger log = LoggerFactory.getLogger(QNAMgtController.class);
-	
-	@Autowired
-	private QNAMgtUseCase qnaMgtUseCase;
-	
-	@Autowired
-	private QNAUseCase qnaUseCase;
+
+	private final QNAMgtUseCase qnaMgtUseCase;
+	private final QNAUseCase qnaUseCase;
 	
 	// 문의관리(미답변) or 문의관리(답변완료) + 답변 리스트
 	@GetMapping("/list")

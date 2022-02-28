@@ -3,10 +3,10 @@ package com.thisfit.shoppingmall.admin.login.domain.usecase;
 import com.thisfit.shoppingmall.admin.login.domain.repository.AdminLoginGateway;
 import com.thisfit.shoppingmall.admin.login.domain.vo.AdminLoginVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class AdminLoginUseCase {
 	
 	private final AdminLoginGateway adminLoginGateway;

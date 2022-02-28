@@ -5,16 +5,16 @@ import com.thisfit.shoppingmall.admin.qnamgt.domain.vo.QNAMgtAnswerModifyVO;
 import com.thisfit.shoppingmall.admin.qnamgt.domain.vo.QNAMgtAnswerWriteVO;
 import com.thisfit.shoppingmall.admin.qnamgt.repository.datasource.QNAMgtAnswer;
 import com.thisfit.shoppingmall.admin.qnamgt.repository.datasource.QNAMgtAnswerJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class QNAMgtAnswerJpa implements QNAMgtAnswerGateway {
 
-    @Autowired
-    private QNAMgtAnswerJpaRepository qnaMgtAnswerJpaRepository;
+    private final QNAMgtAnswerJpaRepository qnaMgtAnswerJpaRepository;
 
     // 답변 디테일
     @Override

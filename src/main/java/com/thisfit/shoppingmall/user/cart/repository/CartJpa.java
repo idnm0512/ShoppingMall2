@@ -7,16 +7,16 @@ import com.thisfit.shoppingmall.user.cart.domain.repository.CartGateway;
 import com.thisfit.shoppingmall.user.cart.domain.vo.CartAddItemVO;
 import com.thisfit.shoppingmall.user.cart.repository.datasource.Cart;
 import com.thisfit.shoppingmall.user.cart.repository.datasource.CartJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class CartJpa implements CartGateway {
 
-	@Autowired
-	private CartJpaRepository cartJpaRepository;
+	private final CartJpaRepository cartJpaRepository;
 	
 	// 장바구니 리스트
 	@Override

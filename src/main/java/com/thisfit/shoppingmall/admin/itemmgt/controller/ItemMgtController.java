@@ -7,9 +7,9 @@ import com.thisfit.shoppingmall.admin.itemmgt.domain.dto.ItemMgtRequest;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.usecase.ItemMgtUseCase;
 import com.thisfit.shoppingmall.user.item.domain.usecase.ItemUseCase;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInfoVO;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,17 +23,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/itemMgt")
 public class ItemMgtController {
 
 	public static final Logger log = LoggerFactory.getLogger(ItemMgtController.class);
-	
-	@Autowired
-	private ItemMgtUseCase itemMgtUseCase;
-	
-	@Autowired
-	private ItemUseCase itemUseCase;
+
+	private final ItemMgtUseCase itemMgtUseCase;
+	private final ItemUseCase itemUseCase;
 	
 	// 상품관리 페이지 진입
 	@GetMapping("/list")

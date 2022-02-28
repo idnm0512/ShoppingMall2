@@ -3,18 +3,18 @@ package com.thisfit.shoppingmall.admin.usermgt.repository;
 import com.thisfit.shoppingmall.admin.usermgt.domain.repository.UserMgtGateway;
 import com.thisfit.shoppingmall.admin.usermgt.repository.datasource.UserMgtJpaRepository;
 import com.thisfit.shoppingmall.user.join.repository.datasource.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class UserMgtJpa implements UserMgtGateway {
 
-	@Autowired
-	private UserMgtJpaRepository userMgtJpaRepository;
+	private final UserMgtJpaRepository userMgtJpaRepository;
 	
 	// 회원 리스트
 	@Override

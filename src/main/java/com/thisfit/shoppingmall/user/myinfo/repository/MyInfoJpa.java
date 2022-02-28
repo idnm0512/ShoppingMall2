@@ -4,16 +4,16 @@ import com.thisfit.shoppingmall.user.join.repository.datasource.User;
 import com.thisfit.shoppingmall.user.myinfo.domian.repository.MyInfoGateway;
 import com.thisfit.shoppingmall.user.myinfo.domian.vo.MyInfoModifyVO;
 import com.thisfit.shoppingmall.user.myinfo.repository.datasource.MyInfoJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class MyInfoJpa implements MyInfoGateway {
 
-	@Autowired
-	private MyInfoJpaRepository myInfoJpaRepository;
+	private final MyInfoJpaRepository myInfoJpaRepository;
 	
 	// 내 정보 보기
 	@Override

@@ -5,10 +5,10 @@ import com.thisfit.shoppingmall.admin.commmgt.domain.repository.CommMgtGateway;
 import com.thisfit.shoppingmall.admin.commmgt.domain.vo.CommMgtModifyVO;
 import com.thisfit.shoppingmall.admin.commmgt.domain.vo.CommMgtWriteVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class CommMgtUseCase {
 
 	private final CommMgtGateway commMgtGateway;

@@ -9,12 +9,12 @@ import com.thisfit.shoppingmall.user.order.domain.repository.OrderGateway;
 import com.thisfit.shoppingmall.user.order.domain.vo.ItemInOrderVO;
 import com.thisfit.shoppingmall.user.order.domain.vo.OrderItemVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import net.sf.json.JSONArray;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class OrderUseCase {
 
 	private final OrderGateway orderGateway;

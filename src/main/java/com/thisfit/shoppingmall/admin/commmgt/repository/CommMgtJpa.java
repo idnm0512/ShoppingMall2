@@ -5,16 +5,16 @@ import com.thisfit.shoppingmall.admin.commmgt.domain.vo.CommMgtModifyVO;
 import com.thisfit.shoppingmall.admin.commmgt.domain.vo.CommMgtWriteVO;
 import com.thisfit.shoppingmall.admin.commmgt.repository.datasource.CommMgtJpaRepository;
 import com.thisfit.shoppingmall.user.community.repository.datasource.Community;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class CommMgtJpa implements CommMgtGateway {
 
-	@Autowired
-	private CommMgtJpaRepository commMgtJpaRepository;
+	private final CommMgtJpaRepository commMgtJpaRepository;
 	
 	// 커뮤관리 작성
 	@Override

@@ -4,10 +4,10 @@ import com.thisfit.shoppingmall.user.join.domain.dto.JoinRequest;
 import com.thisfit.shoppingmall.user.join.domain.repository.JoinGateway;
 import com.thisfit.shoppingmall.user.join.domain.vo.JoinVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class JoinUseCase {
 
 	private final JoinGateway joinGateway;

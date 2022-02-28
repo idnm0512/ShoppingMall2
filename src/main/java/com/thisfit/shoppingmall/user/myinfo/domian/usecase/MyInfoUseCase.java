@@ -6,10 +6,10 @@ import com.thisfit.shoppingmall.user.myinfo.domian.repository.MyInfoGateway;
 import com.thisfit.shoppingmall.user.myinfo.domian.vo.MyInfoModifyVO;
 import com.thisfit.shoppingmall.user.myinfo.domian.vo.MyInfoVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class MyInfoUseCase {
 
 	private final MyInfoGateway myInfoGateway;

@@ -4,16 +4,16 @@ import com.thisfit.shoppingmall.user.join.domain.repository.JoinGateway;
 import com.thisfit.shoppingmall.user.join.domain.vo.JoinVO;
 import com.thisfit.shoppingmall.user.join.repository.datasource.JoinJpaRepository;
 import com.thisfit.shoppingmall.user.join.repository.datasource.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class JoinJpa implements JoinGateway {
 
-	@Autowired
-	private JoinJpaRepository joinJpaRepository;
+	private final JoinJpaRepository joinJpaRepository;
 
 	// 회원가입
 	@Override

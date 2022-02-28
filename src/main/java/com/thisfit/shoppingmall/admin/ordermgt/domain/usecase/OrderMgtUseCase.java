@@ -9,10 +9,10 @@ import com.thisfit.shoppingmall.user.order.domain.vo.ItemInOrderVO;
 import com.thisfit.shoppingmall.util.paging.PageMaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class OrderMgtUseCase {
 	
 	private final OrderMgtGateway orderMgtGateway;

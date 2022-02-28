@@ -3,15 +3,16 @@ package com.thisfit.shoppingmall.admin.login.controller;
 import javax.servlet.http.HttpSession;
 
 import com.thisfit.shoppingmall.admin.login.domain.usecase.AdminLoginUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/adminLogin")
 public class AdminLoginController {
@@ -29,9 +30,8 @@ public class AdminLoginController {
 	 */
 	
 	public static final Logger log = LoggerFactory.getLogger(AdminLoginController.class);
-	
-	@Autowired
-	private AdminLoginUseCase adminLoginUseCase;
+
+	private final AdminLoginUseCase adminLoginUseCase;
 	
 	// 관리자 로그인 페이지 진입
 	@GetMapping

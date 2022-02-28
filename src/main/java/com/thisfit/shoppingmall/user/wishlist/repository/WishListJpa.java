@@ -7,17 +7,17 @@ import com.thisfit.shoppingmall.user.wishlist.domain.repository.WishListGateway;
 import com.thisfit.shoppingmall.user.wishlist.domain.vo.WishListInsertVO;
 import com.thisfit.shoppingmall.user.wishlist.repository.datasource.WishList;
 import com.thisfit.shoppingmall.user.wishlist.repository.datasource.WishListJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class WishListJpa implements WishListGateway {
 
-	@Autowired
-	private WishListJpaRepository wishListJpaRepository;
+	private final WishListJpaRepository wishListJpaRepository;
 	
 	// 관심상품 리스트
 	@Override

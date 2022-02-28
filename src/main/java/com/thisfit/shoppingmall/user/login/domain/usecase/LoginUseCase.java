@@ -11,12 +11,12 @@ import com.thisfit.shoppingmall.util.kakaologin.KakaoAccessToken;
 import com.thisfit.shoppingmall.util.kakaologin.KakaoUniqueNo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class LoginUseCase {
 
 	private final LoginGateway loginGateway;

@@ -3,16 +3,16 @@ package com.thisfit.shoppingmall.user.community.repository;
 import com.thisfit.shoppingmall.user.community.domain.repository.CommunityGateway;
 import com.thisfit.shoppingmall.user.community.repository.datasource.Community;
 import com.thisfit.shoppingmall.user.community.repository.datasource.CommunityJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class CommunityJpa implements CommunityGateway {
 
-	@Autowired
-	private CommunityJpaRepository communityJpaRepository;
+	private final CommunityJpaRepository communityJpaRepository;
 	
 	// 커뮤니티 리스트
 	@Override

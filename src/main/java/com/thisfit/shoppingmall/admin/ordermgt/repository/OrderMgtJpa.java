@@ -6,17 +6,17 @@ import com.thisfit.shoppingmall.admin.ordermgt.domain.repository.OrderMgtGateway
 import com.thisfit.shoppingmall.admin.ordermgt.repository.datasource.OrderMgtJpaRepository;
 import com.thisfit.shoppingmall.user.order.domain.dto.ItemInOrder;
 import com.thisfit.shoppingmall.user.order.repository.datasource.Order;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class OrderMgtJpa implements OrderMgtGateway {
 
-	@Autowired
-	private OrderMgtJpaRepository orderMgtJpaRepository;
+	private final OrderMgtJpaRepository orderMgtJpaRepository;
 	
 	// 주문관리 리스트
 	@Override

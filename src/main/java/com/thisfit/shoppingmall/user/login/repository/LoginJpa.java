@@ -4,14 +4,14 @@ import com.thisfit.shoppingmall.user.login.domain.dto.LoginRequest;
 import com.thisfit.shoppingmall.user.login.domain.repository.LoginGateway;
 import com.thisfit.shoppingmall.user.login.repository.datasource.LoginJpaRepository;
 import com.thisfit.shoppingmall.user.join.repository.datasource.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class LoginJpa implements LoginGateway {
 
-	@Autowired
-	private LoginJpaRepository loginJpaRepository;
+	private final LoginJpaRepository loginJpaRepository;
 	
 	// 로그인 (아이디, 패스워드 체크)
 	@Override

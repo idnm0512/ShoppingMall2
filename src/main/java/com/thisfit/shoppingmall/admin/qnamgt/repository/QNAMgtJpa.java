@@ -6,18 +6,18 @@ import com.thisfit.shoppingmall.admin.qnamgt.domain.repository.QNAMgtGateway;
 import com.thisfit.shoppingmall.admin.qnamgt.repository.datasource.QNAMgtJpaRepository;
 import com.thisfit.shoppingmall.user.qna.domain.dto.QNAWithAnswer;
 import com.thisfit.shoppingmall.user.qna.repository.datasource.QNA;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class QNAMgtJpa implements QNAMgtGateway {
 
-	@Autowired
-	private QNAMgtJpaRepository qnaMgtJpaRepository;
+	private final QNAMgtJpaRepository qnaMgtJpaRepository;
 	
 	// 문의관리(미답변)
 	@Override

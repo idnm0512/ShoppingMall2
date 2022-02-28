@@ -7,16 +7,16 @@ import com.thisfit.shoppingmall.user.order.domain.repository.OrderGateway;
 import com.thisfit.shoppingmall.user.order.domain.vo.OrderItemVO;
 import com.thisfit.shoppingmall.user.order.repository.datasource.Order;
 import com.thisfit.shoppingmall.user.order.repository.datasource.OrderJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class OrderJpa implements OrderGateway {
 
-	@Autowired
-	private OrderJpaRepository orderJpaRepository;
+	private final OrderJpaRepository orderJpaRepository;
 	
 	// 상품 주문 리스트
 	@Override

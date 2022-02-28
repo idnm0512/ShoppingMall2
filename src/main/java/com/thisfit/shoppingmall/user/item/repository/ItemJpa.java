@@ -3,16 +3,16 @@ package com.thisfit.shoppingmall.user.item.repository;
 import com.thisfit.shoppingmall.user.item.domain.repository.ItemGateway;
 import com.thisfit.shoppingmall.user.item.repository.datasource.Item;
 import com.thisfit.shoppingmall.user.item.repository.datasource.ItemJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class ItemJpa implements ItemGateway {
 
-	@Autowired
-	private ItemJpaRepository itemJpaRepository;
+	private final ItemJpaRepository itemJpaRepository;
 	
 	// 상품 리스트
 	@Override

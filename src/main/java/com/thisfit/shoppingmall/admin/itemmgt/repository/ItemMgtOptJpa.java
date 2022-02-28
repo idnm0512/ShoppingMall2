@@ -4,18 +4,18 @@ import com.thisfit.shoppingmall.admin.itemmgt.domain.repository.ItemMgtOptGatewa
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInsertVO;
 import com.thisfit.shoppingmall.admin.itemmgt.repository.datasource.ItemMgtOpt;
 import com.thisfit.shoppingmall.admin.itemmgt.repository.datasource.ItemMgtOptJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ItemMgtOptJpa implements ItemMgtOptGateway {
 
-    @Autowired
-    private ItemMgtOptJpaRepository itemMgtOptJpaRepository;
+    private final ItemMgtOptJpaRepository itemMgtOptJpaRepository;
 
     // 옵션등록
     @Override

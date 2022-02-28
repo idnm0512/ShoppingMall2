@@ -3,6 +3,7 @@ package com.thisfit.shoppingmall.user.qna.controller;
 import com.thisfit.shoppingmall.admin.qnamgt.domain.usecase.QNAMgtUseCase;
 import com.thisfit.shoppingmall.user.qna.domain.dto.QNARequest;
 import com.thisfit.shoppingmall.user.qna.domain.usecase.QNAUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/qna")
 public class QNAController {
 
 	private static final Logger log = LoggerFactory.getLogger(QNAController.class);
-	
-	@Autowired
-	private QNAUseCase qnaUseCase;
-	
-	@Autowired
-	private QNAMgtUseCase qnaMgtUseCase;
+
+	private final QNAUseCase qnaUseCase;
+	private final QNAMgtUseCase qnaMgtUseCase;
 	
 	// 1:1문의(미답변) or 1:1문의(답변완료) + 답변 리스트
 	@GetMapping("/list")

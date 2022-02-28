@@ -1,6 +1,7 @@
 package com.thisfit.shoppingmall.admin.ordermgt.controller;
 
 import com.thisfit.shoppingmall.admin.ordermgt.domain.usecase.OrderMgtUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/orderMgt")
 public class OrderMgtController {
 
 	public static final Logger log = LoggerFactory.getLogger(OrderMgtController.class);
-	
-	@Autowired
-	private OrderMgtUseCase orderMgtUseCase;
+
+	private final OrderMgtUseCase orderMgtUseCase;
 	
 	// 주문관리 페이지 진입
 	@GetMapping("/list")

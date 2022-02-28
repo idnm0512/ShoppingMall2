@@ -1,9 +1,9 @@
 package com.thisfit.shoppingmall.admin.usermgt.controller;
 
 import com.thisfit.shoppingmall.admin.usermgt.domain.usecase.UserMgtUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/userMgt")
 public class UserMgtController {
 
 	public static final Logger log = LoggerFactory.getLogger(UserMgtController.class);
-	
-	@Autowired
-	private UserMgtUseCase userMgtUseCase;
+
+	private final UserMgtUseCase userMgtUseCase;
 	
 	// 회원관리 페이지 진입
 	@GetMapping("/list")

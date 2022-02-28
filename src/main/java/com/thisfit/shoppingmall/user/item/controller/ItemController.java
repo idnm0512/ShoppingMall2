@@ -5,9 +5,9 @@ import java.io.IOException;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.usecase.ItemMgtUseCase;
 import com.thisfit.shoppingmall.user.item.domain.dto.ItemReviewRequest;
 import com.thisfit.shoppingmall.user.item.domain.usecase.ItemUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -18,18 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/item")
 public class ItemController {
 
 	public static final Logger log = LoggerFactory.getLogger(ItemController.class);
-	
-	@Autowired
-	private ItemUseCase itemUseCase;
-	
-	// 상품의 옵션 정보를 가져오기 위함
-	@Autowired
-	private ItemMgtUseCase itemMgtUseCase;
+
+	private final ItemUseCase itemUseCase;
+	private final ItemMgtUseCase itemMgtUseCase;
 	
 	// 상품 리스트
 	@GetMapping("/list")

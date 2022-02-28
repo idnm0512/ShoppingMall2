@@ -14,13 +14,13 @@ import com.thisfit.shoppingmall.admin.itemmgt.repository.datasource.ItemMgtOpt;
 import com.thisfit.shoppingmall.admin.itemmgt.domain.vo.ItemMgtOptInfoVO;
 import com.thisfit.shoppingmall.util.s3.S3FileUpload;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class ItemMgtUseCase {
 	
 	private final ItemMgtGateway itemMgtGateway;

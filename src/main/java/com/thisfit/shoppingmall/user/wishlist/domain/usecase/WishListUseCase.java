@@ -11,10 +11,10 @@ import com.thisfit.shoppingmall.user.wishlist.domain.vo.ItemInWishListVO;
 import com.thisfit.shoppingmall.user.wishlist.domain.vo.WishListInsertVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class WishListUseCase {
 
 	private final WishListGateway wishListGateway;

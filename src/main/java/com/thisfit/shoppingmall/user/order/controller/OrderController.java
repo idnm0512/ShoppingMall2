@@ -1,9 +1,9 @@
 package com.thisfit.shoppingmall.user.order.controller;
 
 import com.thisfit.shoppingmall.user.order.domain.usecase.OrderUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/order")
 public class OrderController {
 
 	public static final Logger log = LoggerFactory.getLogger(OrderController.class);
-	
-	@Autowired
-	private OrderUseCase orderUseCase;
+
+	private final OrderUseCase orderUseCase;
 	
 	// 상품 주문/배송 페이지 진입
 	@GetMapping("/list")

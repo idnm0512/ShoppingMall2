@@ -10,10 +10,10 @@ import com.thisfit.shoppingmall.user.cart.domain.vo.CartAddItemVO;
 import com.thisfit.shoppingmall.user.cart.domain.vo.ItemInCartVO;
 import lombok.RequiredArgsConstructor;
 import net.sf.json.JSONArray;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class CartUseCase {
 
 	private final CartGateway cartGateway;

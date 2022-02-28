@@ -5,18 +5,18 @@ import com.thisfit.shoppingmall.user.item.domain.vo.ItemReviewInsertVO;
 import com.thisfit.shoppingmall.user.item.domain.vo.ItemReviewModifyVO;
 import com.thisfit.shoppingmall.user.item.repository.datasource.ItemReview;
 import com.thisfit.shoppingmall.user.item.repository.datasource.ItemReviewJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ItemReviewJpa implements ItemReviewGateway {
 
-    @Autowired
-    private ItemReviewJpaRepository itemReviewJpaRepository;
+    private final ItemReviewJpaRepository itemReviewJpaRepository;
 
     // 상품 리뷰 리스트
     @Override

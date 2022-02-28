@@ -3,9 +3,9 @@ package com.thisfit.shoppingmall.admin.commmgt.controller;
 import com.thisfit.shoppingmall.admin.commmgt.domain.dto.CommMgtRequest;
 import com.thisfit.shoppingmall.admin.commmgt.domain.usecase.CommMgtUseCase;
 import com.thisfit.shoppingmall.user.community.domain.usecase.CommunityUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -16,17 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/commMgt")
 public class CommMgtController {
 
 	public static final Logger log = LoggerFactory.getLogger(CommMgtController.class);
-	
-	@Autowired
-	private CommMgtUseCase commMgtUseCase;
-	
-	@Autowired
-	private CommunityUseCase communityUseCase;
+
+	private final CommMgtUseCase commMgtUseCase;
+	private final CommunityUseCase communityUseCase;
 	
 	// 커뮤관리 리스트
 	@GetMapping("/list")

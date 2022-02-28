@@ -2,6 +2,7 @@ package com.thisfit.shoppingmall.user.wishlist.controller;
 
 import com.thisfit.shoppingmall.user.wishlist.domain.dto.WishListRequest;
 import com.thisfit.shoppingmall.user.wishlist.domain.usecase.WishListUseCase;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/wishList")
 public class WishListController {
 	
 	public static final Logger log = LoggerFactory.getLogger(WishListController.class);
-	
-	@Autowired
-	private WishListUseCase wishListUseCase;
+
+	private final WishListUseCase wishListUseCase;
 	
 	// 관심상품 페이지 진입 (리스트)
 	@GetMapping

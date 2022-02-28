@@ -4,9 +4,9 @@ import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -14,21 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/sendMail")
 public class MailController {
 	
 	private static final Logger log = LoggerFactory.getLogger(MailController.class);
 	
-	// Java에서 제공하는 mail 객체 생성
-	@Autowired
-	private JavaMailSender mailSender;
+	// Java에서 제공하는 mail 객체 주입
+	private final JavaMailSender mailSender;
 	
 	// 이메일 전송
 	@ResponseBody
 	@PostMapping
 	public String sendMailPost(String email) throws Exception{
-		
 		log.info("이메일 전송 email : " + email);
 		
 		// 인증번호(난수) 생성

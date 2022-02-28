@@ -4,14 +4,14 @@ import com.thisfit.shoppingmall.admin.login.domain.repository.AdminLoginGateway;
 import com.thisfit.shoppingmall.admin.login.domain.vo.AdminLoginVO;
 import com.thisfit.shoppingmall.admin.login.repository.datasource.AdminLogin;
 import com.thisfit.shoppingmall.admin.login.repository.datasource.AdminLoginJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class AdminLoginJpa implements AdminLoginGateway {
-	
-	@Autowired
-	private AdminLoginJpaRepository adminLoginJpaRepository;
+
+	private final AdminLoginJpaRepository adminLoginJpaRepository;
 	
 	// 관리자 로그인
 	@Override

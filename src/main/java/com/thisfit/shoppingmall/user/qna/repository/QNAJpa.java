@@ -8,6 +8,7 @@ import com.thisfit.shoppingmall.user.qna.domain.vo.QNAModifyVO;
 import com.thisfit.shoppingmall.user.qna.domain.vo.QNAWriteVO;
 import com.thisfit.shoppingmall.user.qna.repository.datasource.QNA;
 import com.thisfit.shoppingmall.user.qna.repository.datasource.QNAJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +16,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class QNAJpa implements QNAGateway {
 
-	@Autowired
-	private QNAJpaRepository qnaJpaRepository;
+	private final QNAJpaRepository qnaJpaRepository;
 	
 	// 1:1문의 (미답변)
 	@Override
