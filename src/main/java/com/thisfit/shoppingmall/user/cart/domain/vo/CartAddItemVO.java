@@ -7,16 +7,16 @@ import lombok.Getter;
 @Getter
 public class CartAddItemVO {
 
-	private final int item_no;
+	private final int itemNo;
 	private final int qty;
 	
-	private final String user_id;
+	private final String userId;
 	private final String opt;
 
-	public CartAddItemVO(int item_no, String user_id, int qty, String opt) {
-		this.item_no = item_no;
+	public CartAddItemVO(int itemNo, String userId, int qty, String opt) {
+		this.itemNo = itemNo;
 		this.qty = qty;
-		this.user_id = user_id;
+		this.userId = userId;
 		this.opt = opt;
 	}
 

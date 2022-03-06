@@ -18,12 +18,21 @@ public interface WishListJpaRepository extends JpaRepository<WishList, Integer> 
                                                 "i.price, i.discount, i.name, i.thumbnail) " +
              "from WishList w " +
              "join Item i on w.itemNo = i.no and w.userId = :userId ")
-    List<ItemInWishList> findWishList(@Param("userId") String user_id, Pageable pageable);
+    List<ItemInWishList> findWishList(@Param("userId") String userId, Pageable pageable);
 
     // 전체 관심상품 수
-    int countByUserId(String user_id);
+    int countByUserId(String userId);
 
     // 관심상품 전체 삭제 (관심상품 비우기)
-    void deleteByUserId(String user_id);
+    void deleteByUserId(String userId);
+
+    // 가장 최근 데이터 1개중 wishlist_no column만 (test에 쓰임)
+    // 메서드명으로 쿼리 생성시 findFirstByOrderByWishlistNoDesc();
+    // 하지만, 모든 row를 가져오기 때문에 @Query 사용
+    @Query(value = "select wishlist_no from WISHLIST_TB " +
+                    "order by wishlist_no desc " +
+                    "limit 1",
+           nativeQuery = true)
+    int findLastWishlistNo();
 
 }

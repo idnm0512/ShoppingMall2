@@ -9,10 +9,10 @@ import java.util.List;
 public interface ItemReviewGateway {
 
     // 상품 리뷰 리스트
-    public List<ItemReview> getItemReviewList(int item_no);
+    public List<ItemReview> getItemReviewList(int itemNo);
 
     // 상품 리뷰 디테일
-    public ItemReview getItemReviewDetail(int review_no);
+    public ItemReview getItemReviewDetail(int reviewNo);
 
     // 상품 리뷰 등록하기
     public void insertItemReview(ItemReviewInsertVO itemReviewInsertVO);
@@ -21,6 +21,6 @@ public interface ItemReviewGateway {
     public void modifyItemReview(ItemReviewModifyVO itemReviewModifyVO);
 
     // 상품 리뷰 삭제
-    public void deleteItemReview(int review_no);
+    public void deleteItemReview(int reviewNo);
 
 }

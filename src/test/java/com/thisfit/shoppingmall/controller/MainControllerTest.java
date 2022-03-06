@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MainControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
 
     @Test
     public void mainControllerTest() throws Exception {
@@ -33,7 +33,7 @@ public class MainControllerTest {
         // fail
 //        String main = "fail";
 
-        mvc.perform(get("/main")) // 해당 주소로 HTTP GET 요청
+        mockMvc.perform(get("/main")) // 해당 주소로 HTTP GET 요청
                 .andExpect(status().isOk()) // HTTP 상태값이 200인지 Check
                 .andExpect(view().name(main)); // 반환되는 View 이름 Check
     }

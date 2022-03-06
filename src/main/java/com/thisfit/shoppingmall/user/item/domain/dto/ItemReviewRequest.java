@@ -1,21 +1,23 @@
 package com.thisfit.shoppingmall.user.item.domain.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class ItemReviewRequest {
 
-	private int review_no;
-	private int item_no;
+	private int reviewNo;
+	private int itemNo;
 	private int grade;
 	
-	private String user_id;
+	private String userId;
 	private String content;
-	private String review_img;
+	private String reviewImg;
 	
-	private MultipartFile review_img_file;
+	private MultipartFile reviewImgFile;
 
 }

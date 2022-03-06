@@ -20,8 +20,8 @@ public class WishListUseCase {
 	private final WishListGateway wishListGateway;
 
 	// 관심상품 리스트
-	public List<ItemInWishListVO> getWishList(String user_id, Pageable pageable) {
-		List<ItemInWishList> itemInWishDTOList = wishListGateway.getWishList(user_id,
+	public List<ItemInWishListVO> getWishList(String userId, Pageable pageable) {
+		List<ItemInWishList> itemInWishDTOList = wishListGateway.getWishList(userId,
 																			 pageable);
 		
 		List<ItemInWishListVO> itemInWishVOList = new ArrayList<>();
@@ -30,11 +30,11 @@ public class WishListUseCase {
 			ItemInWishList itemInWishList = itemInWishDTOList.get(i);
 			
 			ItemInWishListVO itemInWishVO =
-									new ItemInWishListVO(itemInWishList.getWishlist_no(),
-														 itemInWishList.getItem_no(),
+									new ItemInWishListVO(itemInWishList.getWishlistNo(),
+														 itemInWishList.getItemNo(),
 														 itemInWishList.getPrice(),
 														 itemInWishList.getDiscount(),
-														 itemInWishList.getUser_id(),
+														 itemInWishList.getUserId(),
 														 itemInWishList.getName(),
 														 itemInWishList.getThumbnail());
 
@@ -49,25 +49,25 @@ public class WishListUseCase {
 	// 관심상품 등록
 	public void addItemInWishList(WishListRequest wishListRequest) {
 		WishListInsertVO wishListInsertVO =
-									new WishListInsertVO(wishListRequest.getItem_no(),
-														 wishListRequest.getUser_id());
+									new WishListInsertVO(wishListRequest.getItemNo(),
+														 wishListRequest.getUserId());
 
 		wishListGateway.addItemInWishList(wishListInsertVO);
 	}
 	
 	// 관심상품 선택 삭제
-	public void deleteItemInWishList(int wishlist_no) {
-		wishListGateway.deleteItemInWishList(wishlist_no);
+	public void deleteItemInWishList(int wishlistNo) {
+		wishListGateway.deleteItemInWishList(wishlistNo);
 	}
 	
 	// 관심상품 전체 삭제 (관심상품 비우기)
-	public void deleteAllItemInWishList(String user_id) {
-		wishListGateway.deleteAllItemInWishList(user_id);
+	public void deleteAllItemInWishList(String userId) {
+		wishListGateway.deleteAllItemInWishList(userId);
 	}
 	
 	// 관심상품 페이징 처리
-	public PageMaker pagingWishList(String user_id, Pageable pageable) {
-		int total = wishListGateway.getTotalWishList(user_id);
+	public PageMaker pagingWishList(String userId, Pageable pageable) {
+		int total = wishListGateway.getTotalWishList(userId);
 
 		PageMaker pageMaker = new PageMaker(pageable, total);
 

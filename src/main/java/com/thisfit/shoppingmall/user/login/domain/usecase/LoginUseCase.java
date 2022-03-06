@@ -12,8 +12,6 @@ import com.thisfit.shoppingmall.util.kakaologin.KakaoUniqueNo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
 @Service
@@ -45,22 +43,12 @@ public class LoginUseCase {
 	}
 	
 	// 아이디 찾기
-	public String findId(String name, String email, Model model, RedirectAttributes rttr) {
-		String id = loginGateway.findId(name, email);
-		
-		if (id != null) {
-			model.addAttribute("id", id);
-			
-			return "/login/findIdSuccess";
-		} else {
-			rttr.addFlashAttribute("result", "fail");
-			
-			return "redirect:/login/findId";
-		}
+	public String findId(String name, String email) {
+		return loginGateway.findId(name, email);
 	}
 	
 	// 비밀번호 찾기
-	public String findPwd(String id, String email, Model model, RedirectAttributes rttr) {
+	public String findPwd(String id, String email) {
 		String pwd = loginGateway.findPwd(id, email);
 
 		if (pwd != null) {
@@ -68,13 +56,9 @@ public class LoginUseCase {
 
 			myInfoGateway.modifyPwd(tempPwd, id);
 
-			model.addAttribute("tempPwd", tempPwd);
-
-			return "/login/findPwdSuccess";
+			return tempPwd;
 		} else {
-			rttr.addFlashAttribute("result", "fail");
-
-			return "redirect:/login/findPwd";
+			return null;
 		}
 	}
 	

@@ -102,17 +102,17 @@
 				<th class="qty_price_width">합계</th>
 			</tr>
 			<c:forEach items="${cartListInfo }" var="list">
-				<tr class="item_row_${list.cart_no }">
+				<tr class="item_row_${list.cartNo }">
 					<td>
-						<input type="checkbox" class="item_check" name="item_check" value="${list.cart_no }">
+						<input type="checkbox" class="item_check" name="itemCheck" value="${list.cartNo }">
 					</td>
 					<td>
-						<a href="/item/detail?no=${list.item_no }">
+						<a href="/item/detail?no=${list.itemNo }">
 							<img src="${list.thumbnail }" width="120" height="120">
 						</a>
 					</td>
 					<td style="text-align: left;">
-						<a href="/item/detail?no=${list.item_no }">
+						<a href="/item/detail?no=${list.itemNo }">
 							<span style="font-size: 15px">${list.name }</span>
 						</a>
 						<br>
@@ -125,14 +125,14 @@
 						${list.discount }%
 					</td>
 					<td>
-						<fmt:formatNumber type="number" pattern="0" var="discounted_price"
-							value="${list.discounted_price }"/>${discounted_price }원
+						<fmt:formatNumber type="number" pattern="0" var="discountedPrice"
+							value="${list.discountedPrice }"/>${discountedPrice }원
 					</td>
 					<td>
-						<input style="width: 40px; height: 30px;" type="number" name="qty" value="${list.qty }" min="1" onchange="onChangeItemQty(this, ${list.cart_no })">
+						<input style="width: 40px; height: 30px;" type="number" name="qty" value="${list.qty }" min="1" onchange="onChangeItemQty(this, ${list.cartNo })">
 					</td>
 					<td>
-						<span class="qty_price">${list.qty * discounted_price }원</span>
+						<span class="qty_price">${list.qty * discountedPrice }원</span>
 					</td>
 				</tr>
 			</c:forEach>
@@ -184,37 +184,37 @@
 					opt: '${list.opt }',
 					price: ${list.price - (list.price*list.discount/100) },
 					qty: ${list.qty },
-					item_no: ${list.item_no}
+					itemNo: ${list.itemNo}
 				},
 			</c:forEach>
 		];
 		
 		// 상품 전체 삭제에 쓰일 id값
-		const user_id = '<c:out value="${sessionScope.id}"/>';
+		const userId = '<c:out value="${sessionScope.id}"/>';
 		
 		// 선택된 상품의 옵션을 가지고 있을 배열
-		let selected_options = [];
+		let selectedOptions = [];
 		
 		// confirm()에 쓰일 변수
-		let confirm_result = '';
+		let confirmResult = '';
 		
 		// 총 구매금액
-		let total_price = 0;
+		let totalPrice = 0;
 		
 		// 총 구매금액이 표시될 위치
-		const total_element = $('span[data-name="final_price"]');
+		const totalElement = $('span[data-name="final_price"]');
 		
 		// 총 구매금액을 표시
 		function refreshTotalPrice() {
-			total_element.text(`${'${total_price}'}원`);
+			totalElement.text(`${'${totalPrice}'}원`);
 		}
 		
 		// 총 구매금액 구하기 (장바구니 페이지 시작 시)
 		function finalPrice() {
 			for (let i=0; i<CARTITEM.length; i++) {
-				const item = CARTITEM[i];
+				const _item = CARTITEM[i];
 				
-				total_price += item.qty * item.price;
+				totalPrice += _item.qty * _item.price;
 			}
 			
 			refreshTotalPrice();
@@ -222,20 +222,20 @@
 		// 총 구매금액 구하기 (장바구니 페이지 시작 시)
 		
 		// 해당 상품데이터 가져오기 (수량 변경할 때, 선택 상품 구매할 때)
-		function getItemFromCartItem(cart_no) {
+		function getItemFromCartItem(cartNo) {
 			for (let i = 0; i < CARTITEM.length; i++) {
-				const cartItem = CARTITEM[i];
+				const _cartItem = CARTITEM[i];
 				
-				// cart_no(번호)를 받아 비교하여 맞는 옵션값 return
-				if (cartItem.id == cart_no) return cartItem;
+				// cartNo(번호)를 받아 비교하여 맞는 옵션값 return
+				if (_cartItem.id == cartNo) return _cartItem;
 			}
 		}
 		// 해당 상품데이터 가져오기 (수량 변경할 때, 선택 상품 구매할 때)
 		
 		// 수량 변경 + 그에 따른 price 값 변경
-		function onChangeItemQty(input, cart_no) {
-			const cartItem = getItemFromCartItem(cart_no); // 상품데이터
-			const prev_price = cartItem.qty * cartItem.price; // '수량 변경 전'의 가격
+		function onChangeItemQty(input, cartNo) {
+			const _cartItem = getItemFromCartItem(cartNo); // 상품데이터
+			const _prevPrice = _cartItem.qty * _cartItem.price; // '수량 변경 전'의 가격
 			
 			// 입력한 수량이 0 일 때
 			if (input.value == 0) {
@@ -243,25 +243,25 @@
 				input.value = 1;
 			}
 			
-			const qty = input.value; // 입력한 수량
-			const qty_price = qty * cartItem.price; // '수량 변경 후'의 가격
+			const _qty = input.value; // 입력한 수량
+			const _qtyPrice = qty * _cartItem.price; // '수량 변경 후'의 가격
 			
 			// CARTITEM 배열에 있는 수량을 계산된 값으로 초기화
-			cartItem.qty = parseInt(qty);
+			_cartItem.qty = parseInt(_qty);
 			
 			// 수량에 따른 price 값이 표시될 위치
-			const $price = $(`.item_row_${'${cart_no }'} .qty_price`);
+			const $price = $(`.item_row_${'${cartNo }'} .qty_price`);
 			
 			// 수량에 따른 price 값 표시
-			$price.text(qty_price+'원');
+			$price.text(qtyPrice+'원');
 			
 			// CART_TB 수량 변경
 			$.ajax({
 				type : 'post',
 				url : '/cart/modifyItemQty',
-				data : { 'qty' : qty, 'cart_no' : cart_no },
+				data : { 'qty' : qty, 'cartNo' : cartNo },
 				success : function(data) {
-					console.log('상품정보 : ' + cartItem.name + ', ' + cartItem.opt +
+					console.log('상품정보 : ' + _cartItem.name + ', ' + _cartItem.opt +
 								'\n변경된 수량 : ' + data);
 				},
 				error : function(error) {
@@ -269,19 +269,19 @@
 				}
 			});
 			
-			total_price -= prev_price;
-			total_price += qty_price;
+			totalPrice -= _prevPrice;
+			totalPrice += _qtyPrice;
 			
 			refreshTotalPrice();
 		}
 		// 수량 변경 + 그에 따른 price 값 변경
 		
 		// 선택 상품 삭제 function
-		function checkedItemDelete(cart_no) {
+		function checkedItemDelete(cartNo) {
 			$.ajax({
 				type : 'post',
 				url : '/cart/deleteItemInCart',
-				data : { 'cart_no' : cart_no },
+				data : { 'cartNo' : cartNo },
 				success : function(data) {
 					window.location.reload();
 				},
@@ -303,21 +303,21 @@
 		
 		// 선택 상품 구매
 		$('.buy_item_btn').on('click', function(e){
-			const checked_item = $('input[name=item_check]:checked');
+			const _checkedItem = $('input[name=item_check]:checked');
 			
-			if (checked_item.length === 0) {
+			if (_checkedItem.length === 0) {
 				alert('구매할 상품을 선택해주세요.');
-			} else if (checked_item.length > 0) {
-				confirm_result = confirm('선택한 상품을 구매하시겠습니까?');
+			} else if (_checkedItem.length > 0) {
+				confirmResult = confirm('선택한 상품을 구매하시겠습니까?');
 				
-				if (!confirm_result) return false;
+				if (!confirmResult) return false;
 				
 				checked_item.each(function(){
-					const cart_no = this.value;
-					const cartItem = getItemFromCartItem(cart_no);
-					const item_no = cartItem.item_no;
+					const _cartNo = this.value;
+					const _cartItem = getItemFromCartItem(cartNo);
+					const _item_no = _cartItem.itemNo;
 					
-					selected_options.push({
+					selectedOptions.push({
 						name: cartItem.opt,
 						qty: cartItem.qty
 					});
@@ -325,23 +325,23 @@
 					$.ajax({
 						type : 'post',
 						url : '/order/buyItem',
-						data : { 'item_no' : item_no, 
-								 'user_id' : user_id,
-								 'selected_options' : JSON.stringify(selected_options)
+						data : { 'itemNo' : itemNo,
+								 'userId' : userId,
+								 'selectedOptions' : JSON.stringify(selectedOptions)
 						},
 						dataType : 'json',
 						traditional : true,
 						success : function(data) {
 							console.log(data);
 							
-							checkedItemDelete(cart_no);
+							checkedItemDelete(cartNo);
 						},
 						error : function(error) {
 							alert('응답실패 : ' + error);
 						}
 					});
 					
-					selected_options = [];
+					selectedOptions = [];
 				});
 			}
 		});
@@ -349,16 +349,16 @@
 		
 		// 전체 상품 구매
 		$('.buy_all_item_btn').on('click', function(e){
-			confirm_result = confirm('전체 상품을 구매하시겠습니까?');
+			confirmResult = confirm('전체 상품을 구매하시겠습니까?');
 			
-			if (!confirm_result) return false;
+			if (!confirmResult) return false;
 			
 			for (let i = 0; i < CARTITEM.length; i++) {
-				const cartItem = CARTITEM[i];
-				const cart_no = cartItem.id;
-				const item_no = cartItem.item_no;
+				const _cartItem = CARTITEM[i];
+				const cartNo = _cartItem.id;
+				const itemNo = _cartItem.itemNo;
 				
-				selected_options.push({
+				selectedOptions.push({
 					name: cartItem.opt,
 					qty: cartItem.qty
 				});
@@ -366,42 +366,42 @@
 				$.ajax({
 					type : 'post',
 					url : '/order/buyItem',
-					data : { 'item_no' : item_no, 
-							 'user_id' : user_id,
-							 'selected_options' : JSON.stringify(selected_options)
+					data : { 'itemNo' : itemNo,
+							 'userId' : userId,
+							 'selectedOptions' : JSON.stringify(selectedOptions)
 					},
 					dataType : 'json',
 					traditional : true,
 					success : function(data) {
 						console.log(data);
 						
-						checkedItemDelete(cart_no);
+						checkedItemDelete(cartNo);
 					},
 					error : function(error) {
 						alert('응답실패 : ' + error);
 					}
 				});
 				
-				selected_options = [];
+				selectedOptions = [];
 			}
 		});
 		// 전체 상품 구매
 		
 		// 선택 상품 삭제
 		$('.item_delete_btn').on('click', function(e){
-			const checked_item = $('input[name=item_check]:checked');
+			const _checkedItem = $('input[name=item_check]:checked');
 			
-			if (checked_item.length === 0) {
+			if (_checkedItem.length === 0) {
 				alert('삭제할 상품을 선택해주세요.');
-			} else if (checked_item.length > 0) {
-				confirm_result = confirm('선택한 상품을 삭제하시겠습니까?');
+			} else if (_checkedItem.length > 0) {
+				confirmResult = confirm('선택한 상품을 삭제하시겠습니까?');
 				
-				if (!confirm_result) return false;
+				if (!confirmResult) return false;
 				
-				checked_item.each(function(){
-					const cart_no = this.value;
+				_checkedItem.each(function(){
+					const _cartNo = this.value;
 					
-					checkedItemDelete(cart_no);
+					checkedItemDelete(_cartNo);
 				});
 			}
 		});
@@ -409,14 +409,14 @@
 		
 		// 전체 상품 삭제 (장바구니 비우기)
 		$('.item_all_delete_btn').on('click', function(e){
-			confirm_result = confirm('장바구니를 비우시겠습니까?');
+			confirmResult = confirm('장바구니를 비우시겠습니까?');
 			
-			if (!confirm_result) return false;
+			if (!confirmResult) return false;
 			
 			$.ajax({
 				type : 'post',
 				url : '/cart/deleteAllItemInCart',
-				data : { 'user_id' : user_id },
+				data : { 'userId' : userId },
 				success :function(data) {
 					window.location.reload();
 				},

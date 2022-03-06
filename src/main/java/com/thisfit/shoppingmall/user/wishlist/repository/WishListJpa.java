@@ -21,14 +21,14 @@ public class WishListJpa implements WishListGateway {
 	
 	// 관심상품 리스트
 	@Override
-	public List<ItemInWishList> getWishList(String user_id, Pageable pageable) {
-		return wishListJpaRepository.findWishList(user_id, pageable);
+	public List<ItemInWishList> getWishList(String userId, Pageable pageable) {
+		return wishListJpaRepository.findWishList(userId, pageable);
 	}
 	
 	// 전체 관심상품 수
 	@Override
-	public int getTotalWishList(String user_id) {
-		return wishListJpaRepository.countByUserId(user_id);
+	public int getTotalWishList(String userId) {
+		return wishListJpaRepository.countByUserId(userId);
 	}
 	
 	// 관심상품 등록
@@ -37,8 +37,8 @@ public class WishListJpa implements WishListGateway {
 	@Transactional
 	public void addItemInWishList(WishListInsertVO addItemInWishListVO) {
 		WishList wishList = WishList.builder()
-									.userId(addItemInWishListVO.getUser_id())
-									.itemNo(addItemInWishListVO.getItem_no())
+									.userId(addItemInWishListVO.getUserId())
+									.itemNo(addItemInWishListVO.getItemNo())
 									.build();
 
 		wishListJpaRepository.save(wishList);
@@ -48,16 +48,16 @@ public class WishListJpa implements WishListGateway {
 	@Override
 	@Modifying
 	@Transactional
-	public void deleteItemInWishList(int wishlist_no) {
-		wishListJpaRepository.deleteById(wishlist_no);
+	public void deleteItemInWishList(int wishlistNo) {
+		wishListJpaRepository.deleteById(wishlistNo);
 	}
 	
 	// 관심상품 전체 삭제 (관심상품 비우기)
 	@Override
 	@Modifying
 	@Transactional
-	public void deleteAllItemInWishList(String user_id) {
-		wishListJpaRepository.deleteByUserId(user_id);
+	public void deleteAllItemInWishList(String userId) {
+		wishListJpaRepository.deleteByUserId(userId);
 	}
 	
 }

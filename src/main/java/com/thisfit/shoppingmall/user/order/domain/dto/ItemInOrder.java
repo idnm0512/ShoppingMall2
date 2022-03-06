@@ -12,19 +12,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ItemInOrder {
 
 	// Order Entity (ORDER_TB)
-	private int order_no;
-	private int item_no;
+	private int orderNo;
+	private int itemNo;
 	private int qty;
 
-	private String user_id;
+	private String userId;
 	private String opt;
-	private String order_state;
+	private String orderState;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime order_date;
+	private LocalDateTime orderDate;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime order_cancel_date;
+	private LocalDateTime orderCancelDate;
 
 	// Item Entity (ITEM_TB)
 	private int price;

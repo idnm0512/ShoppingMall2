@@ -19,20 +19,20 @@ public class CartUseCase {
 	private final CartGateway cartGateway;
 	
 	// 장바구니 리스트
-	public List<ItemInCartVO> getCartList(String user_id) {
-		List<ItemInCart> itemInCartList = cartGateway.getCartList(user_id);
+	public List<ItemInCartVO> getCartList(String userId) {
+		List<ItemInCart> itemInCartList = cartGateway.getCartList(userId);
 		
 		List<ItemInCartVO> itemInCartVOList = new ArrayList<>();
 		
 		for (int i = 0; i < itemInCartList.size(); i++) {
 			ItemInCart itemInCart = itemInCartList.get(i);
 			
-			ItemInCartVO itemInCartVO = new ItemInCartVO(itemInCart.getCart_no(),
-														 itemInCart.getItem_no(),
+			ItemInCartVO itemInCartVO = new ItemInCartVO(itemInCart.getCartNo(),
+														 itemInCart.getItemNo(),
 														 itemInCart.getQty(),
 														 itemInCart.getPrice(),
 														 itemInCart.getDiscount(),
-														 itemInCart.getUser_id(),
+														 itemInCart.getUserId(),
 														 itemInCart.getOpt(),
 														 itemInCart.getName(),
 														 itemInCart.getThumbnail());
@@ -46,36 +46,36 @@ public class CartUseCase {
 	}
 	
 	// 장바구니 담기
-	public String addItemInCart(int item_no, String user_id, String selected_options) {
-		List<Map<String, Object>> info = JSONArray.fromObject(selected_options);
+	public String addItemInCart(int itemNo, String userId, String selectedOptions) {
+		List<Map<String, Object>> info = JSONArray.fromObject(selectedOptions);
 		 
 		for (Map<String, Object> optInfo : info) {
-			CartAddItemVO cartAddItemVO = new CartAddItemVO(item_no,
-															user_id,
+			CartAddItemVO cartAddItemVO = new CartAddItemVO(itemNo,
+															userId,
 															(int)optInfo.get("qty"),
 															(String)optInfo.get("name"));
 
 			cartGateway.addItemInCart(cartAddItemVO);
 		}
 		
-		return selected_options;
+		return selectedOptions;
 	}
 	
 	// 장바구니 상품 수량 변경
-	public int modifyItemQty(int qty, int cart_no) {
-		cartGateway.modifyItemQty(qty, cart_no);
+	public int modifyItemQty(int qty, int cartNo) {
+		cartGateway.modifyItemQty(qty, cartNo);
 		
 		return qty;
 	}
 	
 	// 장바구니 선택 상품 삭제
-	public void deleteItemInCart(int cart_no) {
-		cartGateway.deleteItemInCart(cart_no);
+	public void deleteItemInCart(int cartNo) {
+		cartGateway.deleteItemInCart(cartNo);
 	}
 	
 	// 장바구니 전체 상품 삭제 (장바구니 비우기)
-	public void deleteAllItemInCart(String user_id) {
-		cartGateway.deleteAllItemInCart(user_id);
+	public void deleteAllItemInCart(String userId) {
+		cartGateway.deleteAllItemInCart(userId);
 	}
 	
 }

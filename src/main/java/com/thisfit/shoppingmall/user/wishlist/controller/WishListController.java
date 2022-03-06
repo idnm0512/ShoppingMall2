@@ -28,12 +28,12 @@ public class WishListController {
 	// 관심상품 페이지 진입 (리스트)
 	@GetMapping
 	public String getWishList(@PageableDefault(size = 30, sort = "wishlistNo", direction = Sort.Direction.DESC) Pageable pageable,
-							  String user_id, Model model) {
+							  String userId, Model model) {
 		log.info("관심상품 페이지 진입 (리스트)");
 
-		model.addAttribute("user_id", user_id);
-		model.addAttribute("wishListInfo", wishListUseCase.getWishList(user_id, pageable));
-		model.addAttribute("pageMaker", wishListUseCase.pagingWishList(user_id, pageable));
+		model.addAttribute("userId", userId);
+		model.addAttribute("wishListInfo", wishListUseCase.getWishList(userId, pageable));
+		model.addAttribute("pageMaker", wishListUseCase.pagingWishList(userId, pageable));
 
 		return "wishList/wishList";
 	}
@@ -48,15 +48,15 @@ public class WishListController {
 	// 관심상품 선택 삭제
 	@ResponseBody
 	@PostMapping("/deleteItemInWishList")
-	public void deleteItemInWishList(int wishlist_no) {
-		wishListUseCase.deleteItemInWishList(wishlist_no);
+	public void deleteItemInWishList(int wishlistNo) {
+		wishListUseCase.deleteItemInWishList(wishlistNo);
 	}
 	
 	// 관심상품 전체 삭제 (관심상품 비우기)
 	@ResponseBody
 	@PostMapping("/deleteAllItemInWishList")
-	public void deleteAllItemInWishListPost(String user_id) {
-		wishListUseCase.deleteAllItemInWishList(user_id);
+	public void deleteAllItemInWishListPost(String userId) {
+		wishListUseCase.deleteAllItemInWishList(userId);
 	}
 	
 }

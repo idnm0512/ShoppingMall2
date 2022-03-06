@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 public class WishListRequest {
 
-	private int wishlist_no;
-	private int item_no;
+	private int wishlistNo;
+	private int itemNo;
 	
-	private String user_id;
+	private String userId;
 	
 }

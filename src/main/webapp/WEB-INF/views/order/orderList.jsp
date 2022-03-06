@@ -100,10 +100,10 @@
 		
 		<div class="state_div_outer">
 		    <div class="state_div_inner">
-				<a href="/order/list?user_id=${sessionScope.id }&order_state=배송준비중">배송준비중</a> /
-				<a href="/order/list?user_id=${sessionScope.id }&order_state=배송완료">배송완료</a> /
-				<a href="/order/list?user_id=${sessionScope.id }&order_state=주문취소">주문취소</a> /
-				<a href="/order/list?user_id=${sessionScope.id }&order_state=취소완료">취소완료</a>
+				<a href="/order/list?userId=${sessionScope.id }&order_state=배송준비중">배송준비중</a> /
+				<a href="/order/list?userId=${sessionScope.id }&order_state=배송완료">배송완료</a> /
+				<a href="/order/list?userId=${sessionScope.id }&order_state=주문취소">주문취소</a> /
+				<a href="/order/list?userId=${sessionScope.id }&order_state=취소완료">취소완료</a>
 			</div>
 		</div>
 		
@@ -119,7 +119,7 @@
 				<th class="qty_price_width">구매금액</th>
 				<th class="order_state_width">상태</th>
 				<c:choose>
-					<c:when test="${order_state == '취소완료' }">
+					<c:when test="${orderState == '취소완료' }">
 						<th class="order_date_width">취소날짜</th>
 					</c:when>
 					<c:otherwise>
@@ -128,44 +128,44 @@
 				</c:choose>
 			</tr>
 			<c:forEach items="${orderListInfo }" var="list">
-				<tr class="item_row_${list.order_no }">
+				<tr class="item_row_${list.orderNo }">
 					<td>
-						<input type="checkbox" class="item_check" name="item_check" value="${list.order_no }">
+						<input type="checkbox" class="item_check" name="item_check" value="${list.orderNo }">
 					</td>
 					<td>
-						<a href="/item/detail?no=${list.item_no }">
+						<a href="/item/detail?no=${list.itemNo }">
 							<img src="${list.thumbnail }" width="120" height="120">
 						</a>
 					</td>
 					<td style="text-align: left;">
-						<a href="/item/detail?no=${list.item_no }">
+						<a href="/item/detail?no=${list.itemNo }">
 							<span style="font-size: 15px">${list.name }</span>
 						</a>
 						<br>
 						<span style="color: gray">[옵션: ${list.opt }]</span>
 					</td>
 					<td>
-						<fmt:formatNumber type="number" pattern="0" var="discounted_price"
-							value="${list.discounted_price }"/>${discounted_price }원
+						<fmt:formatNumber type="number" pattern="0" var="discountedPrice"
+							value="${list.discountedPrice }"/>${discountedPrice }원
 					</td>
 					<td>
 						${list.qty }
 					</td>
 					<td>
-						<span class="qty_price">${list.qty * discounted_price }원</span>
+						<span class="qty_price">${list.qty * discountedPrice }원</span>
 					</td>
 					<c:choose>
-						<c:when test="${order_state == '배송준비중' }">
+						<c:when test="${orderState == '배송준비중' }">
 							<td style="color: blue;">
 								${list.order_state }
 							</td>
 						</c:when>
-						<c:when test="${order_state == '배송완료' }">
+						<c:when test="${orderState == '배송완료' }">
 							<td style="color: green;">
 								${list.order_state }
 							</td>
 						</c:when>
-						<c:when test="${order_state == '주문취소' }">
+						<c:when test="${orderState == '주문취소' }">
 							<td style="color: red;">
 								${list.order_state }
 							</td>
@@ -177,15 +177,15 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${order_state == '취소완료' }">
+						<c:when test="${orderState == '취소완료' }">
 							<td>
-							    <fmt:parseDate value="${list.order_cancel_date }" pattern="yyyy-MM-dd" var="parseDateTime" type="both" />
+							    <fmt:parseDate value="${list.orderCancelDate }" pattern="yyyy-MM-dd" var="parseDateTime" type="both" />
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${parseDateTime }"/>
 							</td>
 						</c:when>
 						<c:otherwise>
 							<td>
-							    <fmt:parseDate value="${list.order_date }" pattern="yyyy-MM-dd" var="parseDateTime" type="both" />
+							    <fmt:parseDate value="${list.orderDate }" pattern="yyyy-MM-dd" var="parseDateTime" type="both" />
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${parseDateTime }"/>
 							</td>
 						</c:otherwise>
@@ -196,7 +196,7 @@
 		
 		<br><br>
 
-		<c:if test="${order_state == '배송준비중' }">
+		<c:if test="${orderState == '배송준비중' }">
 			<div class="div_outer">
 				<div class="div_inner">
 					<div>
@@ -218,10 +218,10 @@
 	
 	<script>
 		// 상품 전체 삭제에 쓰일 id값
-		const user_id = '<c:out value="${sessionScope.id}"/>';
+		const userId = '<c:out value="${sessionScope.id}"/>';
 		
 		// confirm()에 쓰일 변수
-		let confirm_result = '';
+		let confirmResult = '';
 		
 		// 상품 전체 선택
 		$('#all_item_check').on('click', function(e){
@@ -235,22 +235,22 @@
 		
 		// 선택 상품 취소
 		$('.cancel_order_btn').on('click', function(e){
-			const checked_item = $('input[name=item_check]:checked');
+			const _checkedItem = $('input[name=item_check]:checked');
 			
-			if (checked_item.length === 0) {
+			if (_checkedItem.length === 0) {
 				alert('취소할 상품을 선택해주세요.');
-			} else if (checked_item.length > 0) {
-				confirm_result = confirm('선택한 상품을 취소하시겠습니까?');
+			} else if (_checkedItem.length > 0) {
+				confirmResult = confirm('선택한 상품을 취소하시겠습니까?');
 				
-				if (!confirm_result) return false;
+				if (!confirmResult) return false;
 				
-				checked_item.each(function(){
-					const order_no = this.value;
+				_checkedItem.each(function(){
+					const _orderNo = this.value;
 					
 					$.ajax({
 						type : 'post',
 						url : '/order/cancelOrder',
-						data : { 'order_no' : order_no },
+						data : { 'orderNo' : _orderNo },
 						success : function(data) {
 							window.location.reload();
 						},
@@ -265,14 +265,14 @@
 		
 		// 전체 상품 취소
 		$('.cancel_all_order_btn').on('click', function(e){
-			confirm_result = confirm('전체 상품을 취소하시겠습니까?');
+			confirmResult = confirm('전체 상품을 취소하시겠습니까?');
 			
-			if (!confirm_result) return false;
+			if (!confirmResult) return false;
 			
 			$.ajax({
 				type : 'post',
 				url : '/order/cancelAllOrder',
-				data : { 'user_id' : user_id },
+				data : { 'userId' : userId },
 				success :function(data) {
 					window.location.reload();
 				},

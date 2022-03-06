@@ -22,11 +22,11 @@ public class OrderController {
 	
 	// 상품 주문/배송 페이지 진입
 	@GetMapping("/list")
-	public String getOrderList(String user_id, String order_state, Model model) {
+	public String getOrderList(String userId, String orderState, Model model) {
 		log.info("상품 주문/배송 페이지 진입");
 		
-		model.addAttribute("order_state", order_state);
-		model.addAttribute("orderListInfo", orderUseCase.getOrderItemList(user_id, order_state));
+		model.addAttribute("orderState", orderState);
+		model.addAttribute("orderListInfo", orderUseCase.getOrderItemList(userId, orderState));
 		
 		return "order/orderList";
 	}
@@ -34,23 +34,23 @@ public class OrderController {
 	// 상품 구매하기
 	@ResponseBody
 	@PostMapping("/buyItem")
-	public String buyItem(int item_no, String user_id, String selected_options) {
+	public String buyItem(int itemNo, String userId, String selectedOptions) {
 		
-		return orderUseCase.buyItem(item_no, user_id, selected_options);
+		return orderUseCase.buyItem(itemNo, userId, selectedOptions);
 	}
 	
 	// 선택 상품 취소 (상태변경)
 	@ResponseBody
 	@PostMapping("/cancelOrder")
-	public void cancelOrder(int order_no) {
-		orderUseCase.cancelOrder(order_no);
+	public void cancelOrder(int orderNo) {
+		orderUseCase.cancelOrder(orderNo);
 	}
 	
 	// 전체 상품 취소 (상태변경)
 	@ResponseBody
 	@PostMapping("/cancelAllOrder")
-	public void cancelAllOrder(String user_id) {
-		orderUseCase.cancelAllOrder(user_id);
+	public void cancelAllOrder(String userId) {
+		orderUseCase.cancelAllOrder(userId);
 	}
 	
 }

@@ -20,26 +20,26 @@ public class OrderUseCase {
 	private final OrderGateway orderGateway;
 
 	// 상품 리스트
-	public List<ItemInOrderVO> getOrderItemList(String user_id, String order_state) {
-		List<ItemInOrder> itemInOrderList = orderGateway.getOrderItemList(user_id, order_state);
+	public List<ItemInOrderVO> getOrderItemList(String userId, String orderState) {
+		List<ItemInOrder> itemInOrderList = orderGateway.getOrderItemList(userId, orderState);
 		
 		List<ItemInOrderVO> itemInOrderVOList = new ArrayList<>();
 		
 		for (int i = 0; i < itemInOrderList.size(); i++) {
 			ItemInOrder itemInOrder = itemInOrderList.get(i);
 			
-			ItemInOrderVO itemInOrderVO = new ItemInOrderVO(itemInOrder.getOrder_no(),
-														    itemInOrder.getItem_no(),
+			ItemInOrderVO itemInOrderVO = new ItemInOrderVO(itemInOrder.getOrderNo(),
+														    itemInOrder.getItemNo(),
 														    itemInOrder.getQty(),
 														    itemInOrder.getPrice(),
 														    itemInOrder.getDiscount(),
-														    itemInOrder.getUser_id(),
+														    itemInOrder.getUserId(),
 														    itemInOrder.getOpt(),
-														    itemInOrder.getOrder_state(),
+														    itemInOrder.getOrderState(),
 														    itemInOrder.getThumbnail(),
 														    itemInOrder.getName(),
-														    itemInOrder.getOrder_date(),
-														    itemInOrder.getOrder_cancel_date());
+														    itemInOrder.getOrderDate(),
+														    itemInOrder.getOrderCancelDate());
 			
 			itemInOrderVO.calculatePrice();
 			
@@ -50,29 +50,29 @@ public class OrderUseCase {
 	}
 	
 	// 상품 구매하기
-	public String buyItem(int item_no, String user_id, String selected_options) {
-		List<Map<String, Object>> info = JSONArray.fromObject(selected_options);
+	public String buyItem(int itemNo, String userId, String selectedOptions) {
+		List<Map<String, Object>> info = JSONArray.fromObject(selectedOptions);
 		
 		for (Map<String, Object> optInfo : info) {
-			OrderItemVO orderItemVO = new OrderItemVO(item_no,
-													  user_id,
+			OrderItemVO orderItemVO = new OrderItemVO(itemNo,
+												      userId,
 													  (int)optInfo.get("qty"),
 													  (String)optInfo.get("name"));
 
 			orderGateway.buyItem(orderItemVO);
 		}
 		
-		return selected_options;
+		return selectedOptions;
 	}
 	
 	// 선택 상품 취소 (상태변경)
-	public void cancelOrder(int order_no) {
-		orderGateway.cancelOrder(order_no);
+	public void cancelOrder(int orderNo) {
+		orderGateway.cancelOrder(orderNo);
 	}
 	
 	// 전체 상품 취소 (상태변경)
-	public void cancelAllOrder(String user_id) {
-		orderGateway.cancelAllOrder(user_id);
+	public void cancelAllOrder(String userId) {
+		orderGateway.cancelAllOrder(userId);
 	}
 	
 }
