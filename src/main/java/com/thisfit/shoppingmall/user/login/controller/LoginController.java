@@ -4,7 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import com.thisfit.shoppingmall.user.login.domain.dto.LoginRequest;
 import com.thisfit.shoppingmall.user.login.domain.usecase.LoginUseCase;
+import com.thisfit.shoppingmall.user.myinfo.domian.repository.MyInfoGateway;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -67,7 +69,17 @@ public class LoginController {
 	// 아이디 찾기
 	@PostMapping("/findId")
 	public String findIdPost(String name, String email, Model model, RedirectAttributes rttr) {
-		return loginUseCase.findId(name, email, model, rttr);
+		String id = loginUseCase.findId(name, email);
+
+		if (id != null) {
+			model.addAttribute("id", id);
+
+			return "login/findIdSuccess";
+		} else {
+			rttr.addFlashAttribute("result", "fail");
+
+			return "redirect:/login/findId";
+		}
 	}
 	
 	// 비밀번호 찾기 페이지 진입
@@ -81,7 +93,17 @@ public class LoginController {
 	// 비밀번호 찾기
 	@PostMapping("/findPwd")
 	public String findPwdPost(String id, String email, Model model, RedirectAttributes rttr) {
-		return loginUseCase.findPwd(id, email, model, rttr);
+		String pwd = loginUseCase.findPwd(id, email);
+
+		if (pwd != null) {
+			model.addAttribute("tempPwd", pwd);
+
+			return "login/findPwdSuccess";
+		} else {
+			rttr.addFlashAttribute("result", "fail");
+
+			return "redirect:/login/findPwd";
+		}
 	}
 	
 }

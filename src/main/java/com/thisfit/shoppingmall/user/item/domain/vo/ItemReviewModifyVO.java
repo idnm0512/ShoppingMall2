@@ -9,10 +9,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class ItemReviewModifyVO {
 
-	private final int review_no;
+	private final int reviewNo;
 	private final int grade;
 	
 	private final String content;
-	private final String review_img;
+	private final String reviewImg;
 
 }

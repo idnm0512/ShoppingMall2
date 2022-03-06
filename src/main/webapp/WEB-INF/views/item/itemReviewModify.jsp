@@ -45,8 +45,8 @@
 				<td>
 					<span style="text-decoration: line-through; font-size: 14px; color: gray;">${itemDetailInfo.price }원</span>
 					<span style="font-size: 17px;">
-						<fmt:formatNumber type="number" pattern="0" var="discounted_price"
-							value="${itemDetailInfo.discounted_price }"/>${discounted_price }원
+						<fmt:formatNumber type="number" pattern="0" var="discountedPrice"
+							value="${itemDetailInfo.discountedPrice }"/>${discountedPrice }원
 					</span>
 					<span style="font-size: 14px;">(<span style="color: red;">${itemDetailInfo.discount }%</span>할인)</span>
 				</td>
@@ -78,23 +78,23 @@
 				<td>
 					<label class="label_scope" for="review_img">
 						<c:choose>
-							<c:when test="${itemReviewInfo.review_img != null }">
-								<img class="img_content" src="${itemReviewInfo.review_img }" id="review_img_view"/>
-								<input type="hidden" name="review_img" value="${itemReviewInfo.review_img }">
+							<c:when test="${itemReviewInfo.reviewImg != null }">
+								<img class="img_content" src="${itemReviewInfo.reviewImg }" id="review_img_view"/>
+								<input type="hidden" name="reviewImg" value="${itemReviewInfo.reviewImg }">
 							</c:when>
 							<c:otherwise>
 								<img class="img_content" src="https://s3.ap-northeast-2.amazonaws.com/jaeho-bucket/img/white.png" id="review_img_view"/>
 							</c:otherwise>
 						</c:choose>
 					</label>
-					<input type="file" id="review_img" name="review_img_file" accept="image/*" style="display: none;" onchange="preview(this, 'review_img_view')">
+					<input type="file" id="review_img" name="reviewImgFile" accept="image/*" style="display: none;" onchange="preview(this, 'review_img_view')">
 				</td>
 			</tr>
 		</table>
 		
 		<br><br>
 		
-		<input type="hidden" name="review_no" value="${itemReviewInfo.review_no }">
+		<input type="hidden" name="reviewNo" value="${itemReviewInfo.reviewNo }">
 		<button class="item_review_btn">상품 리뷰 수정하기</button>
 	</form>
 	
@@ -115,14 +115,14 @@
 		$('.item_review_btn').on('click', function(e){
 			e.preventDefault();
 			
-			const item_review_form = $('#item_review_form')[0];
-			const formData = new FormData(item_review_form);
+			const _itemReviewForm = $('#item_review_form')[0];
+			const _formData = new FormData(_itemReviewForm);
 			
 			$.ajax({
 				type : 'post',
 				url : '/item/modifyReview',
 				enctype : 'multipart/form-data',
-				data : formData,
+				data : _formData,
 		        contentType : false,
 				processData : false,
 				success : function() {

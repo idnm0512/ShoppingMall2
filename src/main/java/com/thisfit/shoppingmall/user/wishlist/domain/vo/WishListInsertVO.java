@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class WishListInsertVO {
 
-	private final int item_no;
+	private final int itemNo;
 	
-	private final String user_id;
+	private final String userId;
 
 }

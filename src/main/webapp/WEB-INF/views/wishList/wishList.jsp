@@ -82,11 +82,11 @@
 			<div class="div_inner">
 				<c:forEach items="${wishListInfo }" var="list">
 					<div class="item_list_div">
-						<div><a href="/item/detail?no=${list.item_no }"><img class="img_content" style="width: 300px; height: 400px" src="${list.thumbnail }"></a></div>
+						<div><a href="/item/detail?no=${list.itemNo }"><img class="img_content" style="width: 300px; height: 400px" src="${list.thumbnail }"></a></div>
 						
 						<br>
 						
-						<div style="font-size: 18px;"><a href="/item/detail?no=${list.item_no }">${list.name }</a></div>
+						<div style="font-size: 18px;"><a href="/item/detail?no=${list.itemNo }">${list.name }</a></div>
 						
 						<br>
 						
@@ -96,11 +96,11 @@
 						
 						<div style="font-size: 18px;">
 							<fmt:formatNumber type="number" pattern="0"
-								value="${list.discounted_price }"/>원
+								value="${list.discountedPrice }"/>원
 						</div>
 						<div style="font-size: 15px;">(<span style="color: red">${list.discount }%</span> 할인)</div>
 						<div>
-							<input type="checkbox" class="item_check" name="item_check" value="${list.wishlist_no }">
+							<input type="checkbox" class="item_check" name="item_check" value="${list.wishlistNo }">
 						</div>
 					</div>
 				</c:forEach>
@@ -144,7 +144,7 @@
 				
 				<!-- 페이지 이동 시 필요한 정보 전송 -->
 				<form id="pageInfo_form" method="get">
-					<input type="hidden" name="user_id" value="${user_id}">
+					<input type="hidden" name="userId" value="${userId}">
 					<input type="hidden" name="page" value="${pageMaker.page }">
 				</form>
 			</div>
@@ -160,28 +160,28 @@
 	</footer>
 	
 	<script>
-		const pageInfo_form = $('#pageInfo_form');
+		const pageInfoForm = $('#pageInfo_form');
 		
 		// 번호 클릭 -> 번호 페이지 이동
 		$('.pageInfo_ul a').on('click', function(e){
 		    e.preventDefault();
 		    
-		    pageInfo_form.find('input[name="page"]').val($(this).attr('href'));
+		    pageInfoForm.find('input[name="page"]').val($(this).attr('href'));
 		 	// form의 action속성을 생략하면 해당 페이지를 요청할 때와 같은 방식으로 처리된다.
 		    // f.attr("action", "/admin/itemMgtList");
-		    pageInfo_form.submit();
+		    pageInfoForm.submit();
 		});
 		
 		// 상품 전체 삭제에 쓰일 id값
-		const user_id = '<c:out value="${sessionScope.id}"/>';
+		const userId = '<c:out value="${sessionScope.id}"/>';
 		
 		// confirm()에 쓰일 변수
-		let confirm_result = '';
+		let confirmResult = '';
 		
 		// 상품 삭제 ajax에 쓰일 success 함수
 		const onDefaultSuccess = function () {
-			pageInfo_form.find('input[name="page"]').val(1);
-			pageInfo_form.submit();
+			pageInfoForm.find('input[name="page"]').val(1);
+			pageInfoForm.submit();
 		}
 		
 		// 상품 삭제 ajax에 쓰일 error 함수
@@ -202,19 +202,19 @@
 		
 		// 선택 상품 삭제
 		$('.item_delete_btn').on('click', function(e){
-			const checked_item = $('input[name=item_check]:checked');
+			const _checkedItem = $('input[name=item_check]:checked');
 			
-			if (checked_item.length === 0) {
+			if (_checkedItem.length === 0) {
 				alert('삭제할 상품을 선택해주세요.');
-			} else if (checked_item.length > 0) {
-				confirm_result = confirm('선택한 상품을 삭제하시겠습니까?');
+			} else if (_checkedItem.length > 0) {
+				confirmResult = confirm('선택한 상품을 삭제하시겠습니까?');
 				
-				if (!confirm_result) return false;
+				if (!_checkedItem) return false;
 				
-				checked_item.each(function(){
-					const wishlist_no = this.value;
+				_checkedItem.each(function(){
+					const _wishlistNo = this.value;
 					
-					deleteItemAjax('/wishList/deleteItemInWishList', { 'wishlist_no' : wishlist_no });
+					deleteItemAjax('/wishList/deleteItemInWishList', { 'wishlistNo' : _wishlistNo });
 				});
 			}
 		});
@@ -222,11 +222,11 @@
 		
 		// 전체 상품 삭제 (장바구니 비우기)
 		$('.item_all_delete_btn').on('click', function(e){
-			confirm_result = confirm('관심상품을 비우시겠습니까?');
+			confirmResult = confirm('관심상품을 비우시겠습니까?');
 			
-			if (!confirm_result) return false;
+			if (!confirmResult) return false;
 			
-			deleteItemAjax('/wishList/deleteAllItemInWishList', { 'user_id' : user_id });
+			deleteItemAjax('/wishList/deleteAllItemInWishList', { 'userId' : userId });
 		});
 		// 전체 상품 삭제 (장바구니 비우기)
 	</script>

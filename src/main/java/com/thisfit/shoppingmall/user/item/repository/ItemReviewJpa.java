@@ -20,8 +20,8 @@ public class ItemReviewJpa implements ItemReviewGateway {
 
     // 상품 리뷰 리스트
     @Override
-    public List<ItemReview> getItemReviewList(int item_no) {
-        return itemReviewJpaRepository.findItemReviewList(item_no);
+    public List<ItemReview> getItemReviewList(int itemNo) {
+        return itemReviewJpaRepository.findItemReviewList(itemNo);
     }
 
     // 상품 리뷰 디테일
@@ -36,11 +36,11 @@ public class ItemReviewJpa implements ItemReviewGateway {
     @Transactional
     public void insertItemReview(ItemReviewInsertVO itemReviewInsertVO) {
         ItemReview itemReview = ItemReview.builder()
-                                          .itemNo(itemReviewInsertVO.getItem_no())
-                                          .userId(itemReviewInsertVO.getUser_id())
+                                          .itemNo(itemReviewInsertVO.getItemNo())
+                                          .userId(itemReviewInsertVO.getUserId())
                                           .content(itemReviewInsertVO.getContent())
                                           .grade(itemReviewInsertVO.getGrade())
-                                          .reviewImg(itemReviewInsertVO.getReview_img())
+                                          .reviewImg(itemReviewInsertVO.getReviewImg())
                                           .build();
 
         itemReviewJpaRepository.save(itemReview);
@@ -51,11 +51,11 @@ public class ItemReviewJpa implements ItemReviewGateway {
     @Modifying
     @Transactional
     public void modifyItemReview(ItemReviewModifyVO itemReviewModifyVO) {
-        ItemReview itemReview = itemReviewJpaRepository.findByReviewNo(itemReviewModifyVO.getReview_no());
+        ItemReview itemReview = itemReviewJpaRepository.findByReviewNo(itemReviewModifyVO.getReviewNo());
 
         itemReview.changeItemReview(itemReviewModifyVO.getGrade(),
                                     itemReviewModifyVO.getContent(),
-                                    itemReviewModifyVO.getReview_img());
+                                    itemReviewModifyVO.getReviewImg());
 
         itemReviewJpaRepository.save(itemReview);
     }
@@ -64,8 +64,8 @@ public class ItemReviewJpa implements ItemReviewGateway {
     @Override
     @Modifying
     @Transactional
-    public void deleteItemReview(int review_no) {
-        itemReviewJpaRepository.deleteById(review_no);
+    public void deleteItemReview(int reviewNo) {
+        itemReviewJpaRepository.deleteById(reviewNo);
     }
 
 }

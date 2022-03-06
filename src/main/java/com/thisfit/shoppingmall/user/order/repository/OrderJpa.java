@@ -20,8 +20,8 @@ public class OrderJpa implements OrderGateway {
 	
 	// 상품 주문 리스트
 	@Override
-	public List<ItemInOrder> getOrderItemList(String user_id, String order_state) {
-		return orderJpaRepository.findOrderItemList(user_id, order_state);
+	public List<ItemInOrder> getOrderItemList(String userId, String orderState) {
+		return orderJpaRepository.findOrderItemList(userId, orderState);
 	}
 	
 	// 상품 구매하기
@@ -30,11 +30,11 @@ public class OrderJpa implements OrderGateway {
 	@Transactional
 	public void buyItem(OrderItemVO orderItemVO) {
 		Order order = Order.builder()
-						   .itemNo(orderItemVO.getItem_no())
+						   .itemNo(orderItemVO.getItemNo())
 						   .qty(orderItemVO.getQty())
-						   .userId(orderItemVO.getUser_id())
+						   .userId(orderItemVO.getUserId())
 						   .opt(orderItemVO.getOpt())
-						   .orderState(orderItemVO.getOrder_state())
+						   .orderState(orderItemVO.getOrderState())
 						   .build();
 
 		orderJpaRepository.save(order);
@@ -44,8 +44,8 @@ public class OrderJpa implements OrderGateway {
 	@Override
 	@Modifying
 	@Transactional
-	public void cancelOrder(int order_no) {
-		Order order = orderJpaRepository.findByOrderNo(order_no);
+	public void cancelOrder(int orderNo) {
+		Order order = orderJpaRepository.findByOrderNo(orderNo);
 
 		order.changeOrderState("주문취소");
 
@@ -56,8 +56,8 @@ public class OrderJpa implements OrderGateway {
 	@Override
 	@Modifying
 	@Transactional
-	public void cancelAllOrder(String user_id) {
-		List<Order> orderList = orderJpaRepository.findByUserIdAndOrderState(user_id, "배송준비중");
+	public void cancelAllOrder(String userId) {
+		List<Order> orderList = orderJpaRepository.findByUserIdAndOrderState(userId, "배송준비중");
 
 		for (int i = 0; i < orderList.size(); i++) {
 			Order order = orderList.get(i);

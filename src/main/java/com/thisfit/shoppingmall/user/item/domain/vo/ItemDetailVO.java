@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class ItemDetailVO {
 	
-	private int discounted_price;
+	private int discountedPrice;
 
 	private final int no;
 	private final int price;
@@ -23,7 +23,7 @@ public class ItemDetailVO {
 
 	// 할인율이 계산된 가격을 구하기 위한 메서드
 	public void calculatePrice() {
-		this.discounted_price = this.price - (this.price * this.discount / 100);
+		this.discountedPrice = this.price - (this.price * this.discount / 100);
 	}
 	
 }

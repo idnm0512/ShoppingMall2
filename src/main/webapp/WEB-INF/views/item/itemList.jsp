@@ -89,7 +89,7 @@
 						
 						<div style="font-size: 18px;">
 							<fmt:formatNumber type="number" pattern="0"
-								value="${list.discounted_price }"/>원
+								value="${list.discountedPrice }"/>원
 						</div>
 						<div style="font-size: 15px;">(<span style="color: red">${list.discount }%</span> 할인)</div>
 					</div>
@@ -142,16 +142,16 @@
 	</footer>
 	
 	<script>
-		const pageInfo_form = $('#pageInfo_form');
+		const pageInfoForm = $('#pageInfo_form');
 		
 		// 번호 클릭 -> 번호 페이지 이동
 		$('.pageInfo_ul a').on('click', function(e){
 		    e.preventDefault();
 		    
-		    pageInfo_form.find('input[name="page"]').val($(this).attr('href'));
+		    pageInfoForm.find('input[name="page"]').val($(this).attr('href'));
 		 	// form의 action속성을 생략하면 해당 페이지를 요청할 때와 같은 방식으로 처리된다.
 		    // f.attr("action", "/item/list");
-		    pageInfo_form.submit();
+		    pageInfoForm.submit();
 		});
 	</script>
 </body>

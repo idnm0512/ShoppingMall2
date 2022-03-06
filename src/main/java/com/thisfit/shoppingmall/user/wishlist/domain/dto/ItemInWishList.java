@@ -8,10 +8,10 @@ import lombok.Getter;
 public class ItemInWishList {
 
 	// WishList Entity (WISHLIST_TB)
-	private int wishlist_no;
-	private int item_no;
+	private int wishlistNo;
+	private int itemNo;
 
-	private String user_id;
+	private String userId;
 
 	// Item Entity (ITEM_TB)
 	private int price;

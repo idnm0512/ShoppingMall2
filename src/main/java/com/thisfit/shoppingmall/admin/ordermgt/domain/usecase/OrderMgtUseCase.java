@@ -27,18 +27,18 @@ public class OrderMgtUseCase {
 		for (int i = 0; i < itemInOrderList.size(); i++) {
 			ItemInOrder itemInOrder = itemInOrderList.get(i);
 			
-			ItemInOrderVO itemInOrderVO = new ItemInOrderVO(itemInOrder.getOrder_no(),
-														    itemInOrder.getItem_no(),
+			ItemInOrderVO itemInOrderVO = new ItemInOrderVO(itemInOrder.getOrderNo(),
+														    itemInOrder.getItemNo(),
 														    itemInOrder.getQty(),
 														    itemInOrder.getPrice(),
 														    itemInOrder.getDiscount(),
-														    itemInOrder.getUser_id(),
+														    itemInOrder.getUserId(),
 														    itemInOrder.getOpt(),
-														    itemInOrder.getOrder_state(),
+														    itemInOrder.getOrderState(),
 														    itemInOrder.getThumbnail(),
 														    itemInOrder.getName(),
-														    itemInOrder.getOrder_date(),
-														    itemInOrder.getOrder_cancel_date());
+														    itemInOrder.getOrderDate(),
+														    itemInOrder.getOrderCancelDate());
 			
 			itemInOrderVO.calculatePrice();
 			

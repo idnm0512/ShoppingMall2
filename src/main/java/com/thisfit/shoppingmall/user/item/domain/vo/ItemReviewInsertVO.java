@@ -8,13 +8,12 @@ import lombok.RequiredArgsConstructor;
 @EqualsAndHashCode
 @Getter
 public class ItemReviewInsertVO {
-	
-	private final int review_no;
-	private final int item_no;
+
+	private final int itemNo;
 	private final int grade;
 	
-	private final String user_id;
+	private final String userId;
 	private final String content;
-	private final String review_img;
+	private final String reviewImg;
 
 }

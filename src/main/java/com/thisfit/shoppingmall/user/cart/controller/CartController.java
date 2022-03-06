@@ -22,10 +22,10 @@ public class CartController {
 	
 	// 장바구니 페이지 진입 (리스트)
 	@GetMapping("/list")
-	public String getCartList(String user_id, Model model) {
+	public String getCartList(String userId, Model model) {
 		log.info("장바구니 페이지 진입 (리스트)");
 		
-		model.addAttribute("cartListInfo", cartUseCase.getCartList(user_id));
+		model.addAttribute("cartListInfo", cartUseCase.getCartList(userId));
 		
 		return "cart/cartList";
 	}
@@ -33,16 +33,16 @@ public class CartController {
 	// 장바구니 담기
 	@ResponseBody
 	@PostMapping("/addItemInCart")
-	public String addItemInCart(int item_no, String user_id, String selected_options) {
+	public String addItemInCart(int itemNo, String userId, String selectedOptions) {
 		
-		return cartUseCase.addItemInCart(item_no, user_id, selected_options);
+		return cartUseCase.addItemInCart(itemNo, userId, selectedOptions);
 	}
 	
 	// 장바구니 상품 수량 변경
 	@ResponseBody
 	@PostMapping("/modifyItemQty")
-	public int itemQtyModify(int qty, int cart_no) {
-		cartUseCase.modifyItemQty(qty, cart_no);
+	public int itemQtyModify(int qty, int cartNo) {
+		cartUseCase.modifyItemQty(qty, cartNo);
 		
 		return qty;
 	}
@@ -50,15 +50,15 @@ public class CartController {
 	// 장바구니 선택 상품 삭제
 	@ResponseBody
 	@PostMapping("/deleteItemInCart")
-	public void deleteItemInCart(int cart_no) {
-		cartUseCase.deleteItemInCart(cart_no);
+	public void deleteItemInCart(int cartNo) {
+		cartUseCase.deleteItemInCart(cartNo);
 	}
 	
 	// 장바구니 전체 상품 삭제 (장바구니 비우기)
 	@ResponseBody
 	@PostMapping("/deleteAllItemInCart")
-	public void deleteAllItemInCart(String user_id) {
-		cartUseCase.deleteAllItemInCart(user_id);
+	public void deleteAllItemInCart(String userId) {
+		cartUseCase.deleteAllItemInCart(userId);
 	}
 	
 }

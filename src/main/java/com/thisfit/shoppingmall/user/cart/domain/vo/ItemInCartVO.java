@@ -9,22 +9,22 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class ItemInCartVO {
 	
-	private int discounted_price;
+	private int discountedPrice;
 	
-	private final int cart_no;
-	private final int item_no;
+	private final int cartNo;
+	private final int itemNo;
 	private final int qty;
 	private final int price;
 	private final int discount;
 	
-	private final String user_id;
+	private final String userId;
 	private final String opt;
 	private final String name;
 	private final String thumbnail;
 
 	// 할인율이 계산된 가격을 구하기 위한 메서드
 	public void calculatePrice() {
-		this.discounted_price = this.price - (this.price * this.discount / 100);
+		this.discountedPrice = this.price - (this.price * this.discount / 100);
 	}
 
 }

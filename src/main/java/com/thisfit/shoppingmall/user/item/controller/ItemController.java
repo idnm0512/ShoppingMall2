@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.thisfit.shoppingmall.admin.itemmgt.domain.usecase.ItemMgtUseCase;
 import com.thisfit.shoppingmall.user.item.domain.dto.ItemReviewRequest;
+import com.thisfit.shoppingmall.user.item.domain.usecase.ItemReviewUseCase;
 import com.thisfit.shoppingmall.user.item.domain.usecase.ItemUseCase;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -27,7 +28,8 @@ public class ItemController {
 
 	private final ItemUseCase itemUseCase;
 	private final ItemMgtUseCase itemMgtUseCase;
-	
+	private final ItemReviewUseCase itemReviewUseCase;
+
 	// 상품 리스트
 	@GetMapping("/list")
 	public String getItemList(@PageableDefault(size = 30, sort = "no", direction = Sort.Direction.DESC) Pageable pageable,
@@ -49,7 +51,7 @@ public class ItemController {
 		
 		model.addAttribute("itemDetailInfo", itemUseCase.getItemDetail(no));
 		model.addAttribute("itemOptInfo", itemMgtUseCase.getItemMgtOptList(no));
-		model.addAttribute("itemReviewInfo", itemUseCase.getItemReviewList(no));
+		model.addAttribute("itemReviewInfo", itemReviewUseCase.getItemReviewList(no));
 		
 		return "item/itemDetail";
 	}
@@ -69,7 +71,7 @@ public class ItemController {
 	@PostMapping("/insertReview")
 	public void insertItemReview(ItemReviewRequest itemReviewRequest) {
 		try {
-			itemUseCase.insertItemReview(itemReviewRequest);
+			itemReviewUseCase.insertItemReview(itemReviewRequest);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			System.out.println("[ERROR]: IllegalStateException 발생 (상품 리뷰 등록하기)");
@@ -81,11 +83,11 @@ public class ItemController {
 	
 	// 상품 리뷰 수정 팝업창 띄우기
 	@GetMapping("/modifyReview")
-	public String startModifyItemReviewPopup(int no, int review_no, Model model) {
+	public String startModifyItemReviewPopup(int no, int reviewNo, Model model) {
 		log.info("상품 리뷰 수정 팝업창 띄우기");
 		
 		model.addAttribute("itemDetailInfo", itemUseCase.getItemDetail(no));
-		model.addAttribute("itemReviewInfo", itemUseCase.getItemReviewDetail(review_no));
+		model.addAttribute("itemReviewInfo", itemReviewUseCase.getItemReviewDetail(reviewNo));
 		
 		return "item/itemReviewModify";
 	}
@@ -95,7 +97,7 @@ public class ItemController {
 	@PostMapping("/modifyReview")
 	public void modifyItemReview(ItemReviewRequest itemReviewRequest) {
 		try {
-			itemUseCase.modifyItemReview(itemReviewRequest);
+			itemReviewUseCase.modifyItemReview(itemReviewRequest);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			System.out.println("[ERROR]: IllegalStateException 발생 (상품 리뷰 수정하기)");
@@ -108,8 +110,8 @@ public class ItemController {
 	// 상품 리뷰 삭제하기
 	@ResponseBody
 	@PostMapping("/deleteReview")
-	public void deleteItemReview(int review_no, String review_img) {
-		itemUseCase.deleteItemReview(review_no, review_img);
+	public void deleteItemReview(int reviewNo, String reviewImg) {
+		itemReviewUseCase.deleteItemReview(reviewNo, reviewImg);
 	}
 	
 }

@@ -8,11 +8,11 @@ import lombok.Getter;
 public class ItemInCart {
 
 	// Cart Entity (CART_TB)
-	private int cart_no;
-	private int item_no;
+	private int cartNo;
+	private int itemNo;
 	private int qty;
 
-	private String user_id;
+	private String userId;
 	private String opt;
 
 	// Item Entity (ITEM_TB)

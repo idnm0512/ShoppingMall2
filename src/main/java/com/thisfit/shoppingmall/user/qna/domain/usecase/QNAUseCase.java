@@ -23,8 +23,8 @@ public class QNAUseCase {
 	// 1:1문의(미답변)
 	public List<QNANoAnswerVO> getQnaListNoAnswer(QNARequest qnaRequest, Pageable pageable) {
 		Page<QNA> qnaList = qnaGateway.getQnaListNoAnswer(qnaRequest.getWriter(),
-															      qnaRequest.isState(),
-																  pageable);
+														  qnaRequest.isState(),
+														  pageable);
 
 		List<QNANoAnswerVO> qnaNoAnswerVOList = new ArrayList<>();
 
